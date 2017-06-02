@@ -11,12 +11,19 @@ class HomeController extends Controller
 
     public function __construct()
     {
+        /*
+        For requests using Basic Authentication or OAuth, you can make up to 5,000 requests per hour.
+        For unauthenticated requests, the rate limit allows you to make up to 60 requests per hour.
+        */
+
         $this->client = new Client;
         $this->client->authenticate('4ecea8431c72918eaf43e2cf284afc36822460ca', null, Client::AUTH_HTTP_TOKEN);
     }
 
     public function index()
     {
+        dd($this->client ->api('user')->repositories('Kirill-K13'));
+
         return view('pages.home');
     }
 
@@ -52,16 +59,23 @@ class HomeController extends Controller
         $watchers_count1   = $repositories1['subscribers_count'];
         $stargazers_count1 = $repositories1['stargazers_count'];
         $forks1            = $repositories1['forks'];
+        $repositories1_name= $request['repository1'];
 
         $repositories2 = $this->client->api('repo')->show($request['login2'], $request['repository2']);
         $watchers_count2   = $repositories2['subscribers_count'];
         $stargazers_count2 = $repositories2['stargazers_count'];
         $forks2            = $repositories2['forks'];
+        $repositories2_name= $request['repository2'];
+
+        $rating1 = $forks1 * 3 + $watchers_count1 * 2 + $stargazers_count1;
+        $rating2 = $forks2 * 3 + $watchers_count2 * 2 + $stargazers_count2;
 
         return view('pages.home', compact('avatar_url1', 'name1', 'login1', 'bio1', 'location1', 'email1', 'blog1',
                                           'avatar_url2', 'name2', 'login2', 'bio2', 'location2', 'email2', 'blog2',
-                                          'watchers_count1',  'stargazers_count1', 'forks1',
-                                          'watchers_count2',  'stargazers_count2', 'forks2')
+                                          'watchers_count1',  'stargazers_count1', 'forks1', 'repositories1_name',
+                                          'watchers_count2',  'stargazers_count2', 'forks2', 'repositories2_name',
+                                          'rating1', 'rating2'
+            )
         );
 
     }

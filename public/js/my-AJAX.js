@@ -15,10 +15,10 @@ function getListRepos(input) {
 
             var option = '';
             for (var i = 0; i < listRepos.length; i++) {
-                option += '<option>'+listRepos[i]+'</option>';
+                option += '<option>' + listRepos[i] + '</option>';
             }
 
-            $('#list-'+input).html(option);
+            $('#list-' + input).html(option);
 
         },
 
@@ -30,15 +30,15 @@ function getListRepos(input) {
 
 function getDataRepos() {
 
-    var token       = $('meta[name="csrf-token"]').attr('content');
+    var token = $('meta[name="csrf-token"]').attr('content');
 
-    var login1      = $("input[name='login1']").val();
+    var login1 = $("input[name='login1']").val();
     var repository1 = $("#list-login1").val();
-    var login2      = $("input[name='login2']").val();
+    var login2 = $("input[name='login2']").val();
     var repository2 = $("#list-login2").val();
 
-    alert(login1 + ': ' + repository1 + ' ' + login2 + ': ' + repository2);
-   /* $.ajax({
+
+    $.ajax({
 
         url: '/get-data-repository',
         method: 'POST',
@@ -50,14 +50,13 @@ function getDataRepos() {
             repository2: repository2
         },
 
-        success: function (listRepos) {
-
+        success: function (data) {
 
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
 
+        }
     });
-    }*/
 }
