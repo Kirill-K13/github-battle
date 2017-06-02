@@ -26,13 +26,6 @@ $app = new Illuminate\Foundation\Application(
 |
 */
 
-// For github API
-$app->singleton('Github\Client', function(){
-  $client = new Github\Client();
-
-  return $client;
-});
-
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,

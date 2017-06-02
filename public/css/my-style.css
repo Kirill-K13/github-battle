@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+}
+a {
+    color: #0366d6;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+ul{
+    display: block;
+    list-style-type: disc;
+}
+ul, ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.battle {
+    margin-top: 20px;
+}
+.result {
+    width: 50%;
+    padding-left: 8px !important;
+}
+.user {
+    width: 25%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.pr-3 {
+
+}
+
+.avatar {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 3px;
+}
+
+.vcard-fullname {
+    font-size: 26px;
+    line-height: 30px;
+}
+
+.vcard-username {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    color: #666;
+}
+
+.user-profile-bio {
+    margin-bottom: 12px;
+    overflow: hidden;
+    font-size: 14px;
+    color: #6a737d;
+}
+
+.vcard-details {
+    list-style: none;
+    padding-top: 10px;
+    padding-right: 16px;
+    border-color: rgb(234, 236, 239) !important;
+    border-top: 1px solid rgb(225, 228, 232) !important;
+}
+
+
+
+
+
