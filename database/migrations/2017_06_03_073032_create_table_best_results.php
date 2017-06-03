@@ -21,6 +21,8 @@ class CreateTableBestResults extends Migration
             $table->string('avatar_url')->nullable();
             $table->integer('rating');
 
+            $table->unique(['login', 'repository']);
+
             $table->timestamps();
         });
     }

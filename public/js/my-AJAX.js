@@ -11,6 +11,13 @@ function getListRepos(input) {
 
         success: function (listRepos) {
 
+            $(".fakeloader").removeAttr( 'style' ).html('');
+
+            if (listRepos == 'ERROR: user not found!') {
+                $('#help-'+input).html('<strong>ERROR: user not found!</strong>');
+                return;
+            }
+
             listRepos = JSON.parse(listRepos);
 
             var option = '';
@@ -25,6 +32,14 @@ function getListRepos(input) {
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
         }
+    });
+
+    $(".fakeloader").removeAttr( 'style' ).html('').fakeLoader({
+        timeToHide: 15000,
+        bgColor: "#1e1e1e",
+        spinner: "spinner2"
+        // OR spinner:"spinner1" - "spinner7"
+        // OR imagePath:"img/favicon.ico"
     });
 }
 

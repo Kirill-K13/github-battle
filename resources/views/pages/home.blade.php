@@ -17,14 +17,12 @@
                                 <div class="col-xs-12 col-sm-12 col-md-5">
 
                                     {{--LOGIN1--}}
-                                    <div class="form-group{{ $errors->has('login1') ? ' has-error' : '' }}">
+                                    <div class="form-group">
                                         <label for="login1" class="col-md-6 control-label pull-left">User-1 Login:</label>
                                         <div class="col-md-6">
 
-
                                             <div class="input-group">
-                                                <input id="login1" type="text" class="form-control" name="login1"
-                                                       value="{{ old('login1') }}" required autofocus>
+                                                <input id="login1" type="text" class="form-control" name="login1" required autofocus>
                                                 <span class="input-group-btn">
                                                     <button type="button" class ="btn btn-primary" onclick="getListRepos('login1')">
                                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -32,11 +30,7 @@
                                                 </span>
                                             </div>
 
-                                            @if ($errors->has('login1'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('login1') }}</strong>
-                                                </span>
-                                            @endif
+                                            <span class="help-block" id="help-login1"></span>
                                         </div>
                                     </div>
 
@@ -67,15 +61,13 @@
 
                                 <div class="col-xs-12 col-sm-12 col-md-5">
                                     {{--LOGIN2--}}
-                                    <div class="form-group{{ $errors->has('login2') ? ' has-error' : '' }}">
+                                    <div class="form-group">
                                         <label for="login2" class="col-md-6 control-label">User-2 Login:</label>
 
                                         <div class="col-md-6">
 
-
                                             <div class="input-group">
-                                                <input id="login2" type="text" class="form-control" name="login2"
-                                                       value="{{ old('login2') }}">
+                                                <input id="login2" type="text" class="form-control" name="login2" required>
                                                 <span class="input-group-btn">
                                                     <button type="button" class ="btn btn-primary" onclick="getListRepos('login2')">
                                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -83,11 +75,7 @@
                                                 </span>
                                             </div>
 
-                                            @if ($errors->has('login2'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('login2') }}</strong>
-                                                </span>
-                                            @endif
+                                            <span class="help-block" id="help-login2"></span>
 
                                         </div>
                                     </div>

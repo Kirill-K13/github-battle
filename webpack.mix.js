@@ -15,5 +15,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .copy('node_modules/bootstrap-sass/assets/fonts', 'public/fonts')
     .copy('resources/assets/css/my-style.css', 'public/css')
+    .copy('resources/assets/css/fake-loader.css', 'public/css')
     .copy('resources/assets/js/my-AJAX.js', 'public/js')
+    .copy('resources/assets/js/fake-loader.min.js', 'public/js')
     .copyDirectory('resources/assets/images', 'public/images');

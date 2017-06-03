@@ -110,6 +110,11 @@ h3 {
     transition: .5s;
 }
 
+.help-block {
+    color: red;
+    font-weight: bold;
+    text-shadow: #000000 0 1px 0;
+}
 
 
 

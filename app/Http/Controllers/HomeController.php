@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Github\Client;
-use App\BestResult;
+use App\Models\BestResult;
 
 class HomeController extends Controller
 {
@@ -25,12 +25,19 @@ class HomeController extends Controller
 
     public function index()
     {
+        //dd($this->client->api('user')->find('Kirill-K13'));
         return view('pages.home');
     }
 
-    public function getRepository(Request $request)
+    public function getRepositories(Request $request)
     {
-        $repositories = $this->client ->api('user')->repositories($request['login']);
+        // Validation:
+        $user = $this->client->api('user')->find($request['login'])['users'];
+        if (empty($user)) {
+            return 'ERROR: user not found!';
+        }
+
+        $repositories = $this->client->api('user')->repositories($request['login']);
         foreach ($repositories as $item) $reposName[] = $item['name'];
 
         return json_encode($reposName);
@@ -38,13 +45,19 @@ class HomeController extends Controller
 
     public function getDataRepository(Request $request) {
 
+        // Validation:
+        $this->validate($request, [
+            'repository1' => 'required|string|not_in:Repository',
+            'repository2' => 'required|string|not_in:Repository',
+        ]);
+
         $user1 = $this->client->api('user')->show($request['login1']);
         $avatar_url1 = $user1['avatar_url'];
         $name1       = $user1['name'];
         $login1      = $user1['login'];
         $bio1        = $user1['bio'];
         $location1   = $user1['location'];
-        $email1      = $user1['email'];  // null???
+        $email1      = $user1['email'];
         $blog1       = $user1['blog'];
 
         $user2 = $this->client->api('user')->show($request['login2']);
@@ -53,7 +66,7 @@ class HomeController extends Controller
         $login2      = $user2['login'];
         $bio2        = $user2['bio'];
         $location2   = $user2['location'];
-        $email2      = $user2['email'];  // null???
+        $email2      = $user2['email'];
         $blog2       = $user2['blog'];
 
         $repositories1 = $this->client->api('repo')->show($request['login1'], $request['repository1']);
@@ -71,15 +84,23 @@ class HomeController extends Controller
         $rating1 = ($forks1 * 3) + ($watchers_count1 * 2) + $stargazers_count1;
         $rating2 = ($forks2 * 3) + ($watchers_count2 * 2) + $stargazers_count2;
 
-        $rating1 > $rating2 ?
-            BestResult::create([
-            'login'=>$login1, 'repository'=>$repositories1_name, 'avatar_url'=>$avatar_url1, 'rating'=>$rating1
-        ])
-            :
-            BestResult::create([
-            'login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2
-        ]);
-            
+        // Save best result in DB:
+        if ($rating1 > $rating2) {
+            if ( ($result = BestResult::where('login', $login1)->where('repository', $repositories1_name)->first() ) == null)
+                BestResult::create([
+                    'login'=>$login1, 'repository'=>$repositories1_name, 'avatar_url'=>$avatar_url1, 'rating'=>$rating1
+                ]);
+            elseif ($result->rating != $rating1)
+                $result->update(['login'=>$login1, 'repository'=>$repositories1_name, 'avatar_url'=>$avatar_url1, 'rating'=>$rating1]);
+        } else {
+            if ( ($result = BestResult::where('login', $login2)->where('repository', $repositories2_name)->first() ) == null)
+                BestResult::create([
+                    'login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2
+                ]);
+            elseif ($result->rating != $rating2)
+                $result->update(['login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2]);
+        }
+
 
         return view('pages.home', compact('avatar_url1', 'name1', 'login1', 'bio1', 'location1', 'email1', 'blog1',
                                           'avatar_url2', 'name2', 'login2', 'bio2', 'location2', 'email2', 'blog2',

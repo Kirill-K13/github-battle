@@ -12,9 +12,9 @@
 
     <title>Github-battle</title>
 
-
     <link href="{{mix('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('css/my-style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/fake-loader.css')}}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,12 +32,13 @@
 
             @yield('content')
 
-
+            <div class="fakeloader"></div>
     </div>
 </div>
 
 
 <script src="{{mix('js/app.js')}}"></script>
 <script src="{{asset('js/my-AJAX.js')}}"></script>
+<script src="{{asset('js/fake-loader.min.js')}}"></script>
 </body>
 </html>
