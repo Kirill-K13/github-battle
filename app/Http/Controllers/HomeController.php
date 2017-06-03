@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Github\Client;
+use App\BestResult;
 
 class HomeController extends Controller
 {
@@ -17,13 +18,13 @@ class HomeController extends Controller
         */
 
         $this->client = new Client;
-        $this->client->authenticate('4ecea8431c72918eaf43e2cf284afc36822460ca', null, Client::AUTH_HTTP_TOKEN);
+        $this->client->authenticate('24ddc685b86fc91704e2db0dbac6d706bd7b8ff1', null , Client::AUTH_HTTP_TOKEN);
+
+        //dd($this->client->api('rate_limit')->getRateLimits());
     }
 
     public function index()
     {
-        dd($this->client ->api('user')->repositories('Kirill-K13'));
-
         return view('pages.home');
     }
 
@@ -43,7 +44,7 @@ class HomeController extends Controller
         $login1      = $user1['login'];
         $bio1        = $user1['bio'];
         $location1   = $user1['location'];
-        $email1      = $user1['email'];
+        $email1      = $user1['email'];  // null???
         $blog1       = $user1['blog'];
 
         $user2 = $this->client->api('user')->show($request['login2']);
@@ -52,7 +53,7 @@ class HomeController extends Controller
         $login2      = $user2['login'];
         $bio2        = $user2['bio'];
         $location2   = $user2['location'];
-        $email2      = $user2['email'];
+        $email2      = $user2['email'];  // null???
         $blog2       = $user2['blog'];
 
         $repositories1 = $this->client->api('repo')->show($request['login1'], $request['repository1']);
@@ -67,8 +68,18 @@ class HomeController extends Controller
         $forks2            = $repositories2['forks'];
         $repositories2_name= $request['repository2'];
 
-        $rating1 = $forks1 * 3 + $watchers_count1 * 2 + $stargazers_count1;
-        $rating2 = $forks2 * 3 + $watchers_count2 * 2 + $stargazers_count2;
+        $rating1 = ($forks1 * 3) + ($watchers_count1 * 2) + $stargazers_count1;
+        $rating2 = ($forks2 * 3) + ($watchers_count2 * 2) + $stargazers_count2;
+
+        $rating1 > $rating2 ?
+            BestResult::create([
+            'login'=>$login1, 'repository'=>$repositories1_name, 'avatar_url'=>$avatar_url1, 'rating'=>$rating1
+        ])
+            :
+            BestResult::create([
+            'login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2
+        ]);
+            
 
         return view('pages.home', compact('avatar_url1', 'name1', 'login1', 'bio1', 'location1', 'email1', 'blog1',
                                           'avatar_url2', 'name2', 'login2', 'bio2', 'location2', 'email2', 'blog2',

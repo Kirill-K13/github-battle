@@ -15,6 +15,9 @@ ul, ol {
     margin-top: 0;
     margin-bottom: 0;
 }
+h3 {
+    text-align: center;
+}
 .battle {
     margin-top: 20px;
 }
@@ -66,6 +69,45 @@ ul, ol {
     padding-right: 16px;
     border-color: rgb(234, 236, 239) !important;
     border-top: 1px solid rgb(225, 228, 232) !important;
+}
+.calculated {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #cacaca;
+}
+.win {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: #000000 1px 1px 0;
+}
+.vs {
+    margin-top: 20px;
+}
+.cup {
+    margin-top: -120px;
+    width: 100px;
+}
+
+.buttonDanger {
+    display:inline-block;
+    margin-top: 4px;
+    padding:6px 15px 6px;
+    font-size:13px;
+    line-height:1.23em;
+    font-weight:bold;
+    color: #ffffff;
+    background:url(../images/button-tail.gif) 0 0 repeat-x #fb4400;
+    cursor:pointer;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    transition: .5s;
+}
+.buttonDanger:hover {
+    background:#fb4400;
+    color: #000cff;
+    transition: .5s;
 }
 
 

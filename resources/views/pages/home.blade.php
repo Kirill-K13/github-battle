@@ -116,7 +116,7 @@
 
                                 <div class="col-xs-12" style="text-align: center">
                                     {{--SUBMIT--}}
-                                    <input type="submit" class="btn btn-danger" value="Battle!">
+                                    <input type="submit" class="buttonDanger" value="Battle!">
                                 </div>
                             </form>
 
@@ -127,7 +127,7 @@
         </div>
 
 
-        @if(isset($repositories2))
+        @if(isset($login1) && isset($login2))
 
             {{--RESULT--}}
             <div class="container">
@@ -140,7 +140,7 @@
                                  src="{{ $avatar_url1 }}">
 
                             @if($rating1 > $rating2)
-                                <img src="{{asset('images/win.png')}}" alt="Win!">
+                                <img src="{{asset('images/win.png')}}" alt="Win!" class="cup">
                             @endif
 
                             {{--Name and Login--}}
@@ -188,7 +188,7 @@
                                               d="M0 4v8c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H1c-.55 0-1 .45-1 1zm13 0L7 9 1 4h12zM1 5.5l4 3-4 3v-6zM2 12l3.5-3L7 10.5 8.5 9l3.5 3H2zm11-.5l-4-3 4-3v6z"></path>
                                     </svg>
 
-                                    <a href="mailto:{{  $email1 }}">{{  $email1 }}</a>
+                                    <a href="mailto:{{ $email1 }}">{{ $email1 }}</a>
                                 </li>
 
                                 {{--Blog--}}
@@ -212,7 +212,7 @@
                             {{--Repository name--}}
                             <div>
                                 <h1 class="vcard-names">
-                                    <span class="vcard-fullname">{{  $repositories1_name }}</span>
+                                    <span class="vcard-fullname">{{ $repositories1_name }}</span>
                                 </h1>
                             </div>
 
@@ -223,7 +223,7 @@
                                      width="16"><path fill-rule="evenodd"
                                                       d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
 
-                                {{  $watchers_count1 }}
+                                Watch: {{  $watchers_count1 }} |
                             </span>
 
                             {{--Star--}}
@@ -232,7 +232,7 @@
                                      viewBox="0 0 14 16"
                                      width="14"><path fill-rule="evenodd"
                                                       d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
-                                {{  $stargazers_count1 }}
+                                Star: {{  $stargazers_count1 }} |
                             </span>
 
                             {{--Fork--}}
@@ -240,7 +240,7 @@
                                 <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1"
                                      viewBox="0 0 10 16" width="10"><path fill-rule="evenodd"
                                                                           d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-                                {{  $forks1 }}
+                                Fork: {{  $forks1 }}
                             </span>
 
                         </div>
@@ -250,64 +250,74 @@
                         {{--RESULT--}}
                         <div class="result pull-left">
 
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 calculated">
                                 <h3>How the rating is calculated:</h3>
                                 {{--Fork--}}
-                                <span>
+                                <span> One Fork
                                     <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1"
                                      viewBox="0 0 10 16" width="10"><path fill-rule="evenodd"
                                                                           d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-                                        1 - <strong>this 3 mark</strong>
+                                        <strong>: this 3 mark</strong>
                                 </span>
                                 {{--Watch--}}
-                                <span>
+                                <span> | One Watch
                                     <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1"
                                      viewBox="0 0 16 16"
                                      width="16"><path fill-rule="evenodd"
                                                       d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
 
-                                        1 - <strong>this 2 mark</strong>
+                                        <strong>: this 2 mark</strong>
                                 </span>
                                 {{--Star--}}
-                                <span>
+                                <span> | One Star
                                     <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1"
                                      viewBox="0 0 14 16"
                                      width="14"><path fill-rule="evenodd"
                                                       d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
-                                        1 - <strong>this 1 mark</strong>
+                                        <strong>: this 1 mark</strong>
                                 </span>
-
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 col-md-6">
+                            <div class="col-xs-12 col-sm-12 col-md-5">
                                 <div>
                                     <h2 class="vcard-names">
 
-                                        <span class="vcard-fullname">{{ $name2 }}</span>
-                                        <span class="vcard-username">{{ $login2 }}</span>
+                                        <span class="vcard-username">{{ $login1 }}</span>
                                         <span class="vcard-username"><strong>Rating: {{ $rating1 }}</strong></span>
 
                                     </h2>
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 col-md-6">
-                                <div>
-                                    <h2 class="vcard-names">
+                            <div class="col-xs-12 col-sm-12 col-md-2" style="text-align: center">
+                                <img src="{{asset('images/vs.png')}}" alt="vs" width="60" class="vs">
+                            </div>
 
-                                        <span class="vcard-fullname">{{ $name2 }}</span>
+                            <div class="col-xs-12 col-sm-12 col-md-5">
+                                <div>
+                                    <h2 class="vcard-names" style="text-align: right">
+
                                         <span class="vcard-username">{{ $login2 }}</span>
-                                        <span class="vcard-username"><strong>Rating: {{ $rating1 }}</strong></span>
+                                        <span class="vcard-username"><strong>Rating: {{ $rating2 }}</strong></span>
 
                                     </h2>
                                 </div>
                             </div>
 
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 win">
+
                                 @if($rating1 > $rating2)
-                                    <span class="vcard-fullname"><strong>Win {{ $name1 }}!</strong></span>
+                                    <h3>
+                                        <span class="vcard-fullname">
+                                            <strong>Win: {{ $login1 }} !</strong>
+                                        </span>
+                                    </h3>
                                 @else
-                                    <span class="vcard-fullname"><strong>Win {{ $name2 }}!</strong></span>
+                                    <h3>
+                                        <span class="vcard-fullname">
+                                            <strong>Win: {{ $login2 }} !</strong>
+                                        </span>
+                                    </h3>
                                 @endif
                             </div>
 
@@ -319,7 +329,9 @@
                             {{--Avatar--}}
                             <img alt="" class="avatar" height="230" width="230"
                                  src="{{ $avatar_url2 }}">
-
+                            @if($rating1 < $rating2)
+                                <img src="{{asset('images/win.png')}}" alt="Win!" class="cup">
+                            @endif
                             {{--Name and Login--}}
                             <div>
                                 <h2 class="vcard-names">
@@ -399,7 +411,7 @@
                                      width="16"><path fill-rule="evenodd"
                                                       d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
 
-                                {{  $watchers_count2 }}
+                                Watch: {{  $watchers_count2 }} |
                             </span>
 
                             {{--Star--}}
@@ -408,7 +420,7 @@
                                      viewBox="0 0 14 16"
                                      width="14"><path fill-rule="evenodd"
                                                       d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
-                                {{  $stargazers_count2 }}
+                               Star: {{  $stargazers_count2 }} |
                             </span>
 
                             {{--Fork--}}
@@ -416,7 +428,7 @@
                                 <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1"
                                      viewBox="0 0 10 16" width="10"><path fill-rule="evenodd"
                                                                           d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-                                {{  $forks2 }}
+                              Fork: {{  $forks2 }}
                             </span>
                         </div>
                     </div>
