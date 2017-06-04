@@ -29,13 +29,13 @@ class HomeController extends Controller
          */
 
         /* Token: */
-        $this->client->authenticate('65ed705caa568784fd8283540d79ca4a4a7ee22d', null , Client::AUTH_HTTP_TOKEN);
+        //$this->client->authenticate('65ed705caa568784fd8283540d79ca4a4a7ee22d', null , Client::AUTH_HTTP_TOKEN);
 
         /* CLIENT_ID: */
         //$this->client->authenticate('Iv1.9b60535f0a322205', 'd58f2fb40d7c551e46f5e79258ac6fcecce82a1b', Client::AUTH_URL_CLIENT_ID);
 
         /* Password: */
-        //$this->client->authenticate('Kirill-K13', 'Auchan15', Client::AUTH_HTTP_PASSWORD);
+        $this->client->authenticate('Kirill-K13', 'Auchan15', Client::AUTH_HTTP_PASSWORD);
 
         /* Testing requests limit */
         //dd($this->client->api('rate_limit')->getRateLimits());
@@ -43,10 +43,9 @@ class HomeController extends Controller
 
     public function index()
     {
-       //$repositories = $this->client->api('user')->repositories('KnpLabs');
-       //dd($repositories[90]);
+        $results = BestResult::all()->sortByDesc('rating')->take(3);
 
-        return view('pages.home');
+        return view('pages.home', compact('results'));
     }
 
     public function getRepositories(Request $request)
@@ -121,12 +120,14 @@ class HomeController extends Controller
                 $result->update(['login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2]);
         }
 
+        $results = BestResult::all()->sortByDesc('rating')->take(3);
 
         return view('pages.home', compact('avatar_url1', 'name1', 'login1', 'bio1', 'location1', 'email1', 'blog1',
                                           'avatar_url2', 'name2', 'login2', 'bio2', 'location2', 'email2', 'blog2',
                                           'watchers_count1',  'stargazers_count1', 'forks1', 'repositories1_name',
                                           'watchers_count2',  'stargazers_count2', 'forks2', 'repositories2_name',
-                                          'rating1', 'rating2'
+                                          'rating1', 'rating2',
+                                          'results'
             )
         );
 

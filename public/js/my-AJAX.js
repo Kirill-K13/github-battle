@@ -10,7 +10,7 @@ function getListRepos(input) {
         data: {_token: token, login: value},
 
         success: function (listRepos) {
-
+            // Stop fakeloader:
             $(".fakeloader").removeAttr( 'style' ).html('');
 
             if (listRepos == 'ERROR: user not found!') {
@@ -30,7 +30,10 @@ function getListRepos(input) {
         },
 
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            // Stop fakeloader:
+            $(".fakeloader").removeAttr( 'style' ).html('');
+
+            console.log(textStatus + ' : ' + errorThrown);
         }
     });
 

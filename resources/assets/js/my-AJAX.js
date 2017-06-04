@@ -33,7 +33,7 @@ function getListRepos(input) {
             // Stop fakeloader:
             $(".fakeloader").removeAttr( 'style' ).html('');
 
-            console.log("Error: " + textStatus + ' : ' + errorThrown);
+            console.log(textStatus + ' : ' + errorThrown);
         }
     });
 
