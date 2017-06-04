@@ -15,17 +15,37 @@ class HomeController extends Controller
         /*
         For requests using Basic Authentication or OAuth, you can make up to 5,000 requests per hour.
         For unauthenticated requests, the rate limit allows you to make up to 60 requests per hour.
+
+        Default Number of search results - 30
+        Fixed: add param in request
+        'page' => 1,
+        'per_page' => 100,
         */
 
         $this->client = new Client;
-        $this->client->authenticate('24ddc685b86fc91704e2db0dbac6d706bd7b8ff1', null , Client::AUTH_HTTP_TOKEN);
 
+        /*
+         * Authenticate in API:
+         */
+
+        /* Token: */
+        $this->client->authenticate('65ed705caa568784fd8283540d79ca4a4a7ee22d', null , Client::AUTH_HTTP_TOKEN);
+
+        /* CLIENT_ID: */
+        //$this->client->authenticate('Iv1.9b60535f0a322205', 'd58f2fb40d7c551e46f5e79258ac6fcecce82a1b', Client::AUTH_URL_CLIENT_ID);
+
+        /* Password: */
+        //$this->client->authenticate('Kirill-K13', 'Auchan15', Client::AUTH_HTTP_PASSWORD);
+
+        /* Testing requests limit */
         //dd($this->client->api('rate_limit')->getRateLimits());
     }
 
     public function index()
     {
-        //dd($this->client->api('user')->find('Kirill-K13'));
+       //$repositories = $this->client->api('user')->repositories('KnpLabs');
+       //dd($repositories[90]);
+
         return view('pages.home');
     }
 
