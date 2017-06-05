@@ -29,107 +29,99 @@ class HomeController extends Controller
          */
 
         /* Token: */
-        //$this->client->authenticate('65ed705caa568784fd8283540d79ca4a4a7ee22d', null , Client::AUTH_HTTP_TOKEN);
+        //$this->client->authenticate(env('GITHUB_TOKEN'), null , Client::AUTH_HTTP_TOKEN);
 
         /* CLIENT_ID: */
-        //$this->client->authenticate('Iv1.9b60535f0a322205', 'd58f2fb40d7c551e46f5e79258ac6fcecce82a1b', Client::AUTH_URL_CLIENT_ID);
+        //$this->client->authenticate(env('GITHUB_CLIENT_ID'), env('GITHUB_CLIENT_SECRET'), Client::AUTH_URL_CLIENT_ID);
 
         /* Password: */
-        $this->client->authenticate('Kirill-K13', 'Auchan15', Client::AUTH_HTTP_PASSWORD);
+            $this->client->authenticate(env('GITHUB_USERNAME'), env('GITHUB_PASSWORD'), Client::AUTH_HTTP_PASSWORD);
 
         /* Testing requests limit */
         //dd($this->client->api('rate_limit')->getRateLimits());
     }
 
+
     public function index()
     {
-        $results = BestResult::all()->sortByDesc('rating')->take(3);
-
         return view('pages.home', compact('results'));
+    }
+
+    public function searchGithub(Request $request) {
+        $search = $this->client->api('search')->repositories($request['search'], 'stars');
+
+        if ($search['total_count'] == 0) {
+            return view('pages.search')->with('error_search', 'Repository not found!');
+        }
+
+        return view('pages.search', compact('search'));
     }
 
     public function getRepositories(Request $request)
     {
-        // Validation:
-        $user = $this->client->api('user')->find($request['login'])['users'];
-        if (empty($user)) {
-            return 'ERROR: user not found!';
+        $repositories = $this->client->api('user')->repositories($request['login']);
+
+        foreach ($repositories as $item) {
+            $repoNames[] = $item['name'];
         }
 
-        $repositories = $this->client->api('user')->repositories($request['login']);
-        foreach ($repositories as $item) $reposName[] = $item['name'];
-
-        return json_encode($reposName);
+        return json_encode($repoNames);
     }
 
     public function getDataRepository(Request $request) {
 
         // Validation:
+        $repositoryRules = 'required|string|not_in:Repository';
+
         $this->validate($request, [
-            'repository1' => 'required|string|not_in:Repository',
-            'repository2' => 'required|string|not_in:Repository',
+            'repository1' => $repositoryRules,
+            'repository2' => $repositoryRules,
         ]);
 
-        $user1 = $this->client->api('user')->show($request['login1']);
-        $avatar_url1 = $user1['avatar_url'];
-        $name1       = $user1['name'];
-        $login1      = $user1['login'];
-        $bio1        = $user1['bio'];
-        $location1   = $user1['location'];
-        $email1      = $user1['email'];
-        $blog1       = $user1['blog'];
+        $user1 = $this->client->api('user')->find($request['login1'])['users'];
+        $user2 = $this->client->api('user')->find($request['login2'])['users'];
+        if (empty($user1) || empty($user2)) {
+            return redirect()->back()->with('error', 'ERROR: user not found!');
+        }
 
-        $user2 = $this->client->api('user')->show($request['login2']);
-        $avatar_url2 = $user2['avatar_url'];
-        $name2       = $user2['name'];
-        $login2      = $user2['login'];
-        $bio2        = $user2['bio'];
-        $location2   = $user2['location'];
-        $email2      = $user2['email'];
-        $blog2       = $user2['blog'];
+        $userFirst  = $this->client->api('user')->show($request['login1']);
+        $userSecond = $this->client->api('user')->show($request['login2']);
 
-        $repositories1 = $this->client->api('repo')->show($request['login1'], $request['repository1']);
-        $watchers_count1   = $repositories1['subscribers_count'];
-        $stargazers_count1 = $repositories1['stargazers_count'];
-        $forks1            = $repositories1['forks'];
-        $repositories1_name= $request['repository1'];
+        $repositoryFirst  = $this->client->api('repo')->show($request['login1'], $request['repository1']);
+        $repositorySecond = $this->client->api('repo')->show($request['login2'], $request['repository2']);
 
-        $repositories2 = $this->client->api('repo')->show($request['login2'], $request['repository2']);
-        $watchers_count2   = $repositories2['subscribers_count'];
-        $stargazers_count2 = $repositories2['stargazers_count'];
-        $forks2            = $repositories2['forks'];
-        $repositories2_name= $request['repository2'];
-
-        $rating1 = ($forks1 * 3) + ($watchers_count1 * 2) + $stargazers_count1;
-        $rating2 = ($forks2 * 3) + ($watchers_count2 * 2) + $stargazers_count2;
+        $rating1 = ($repositoryFirst['forks'] * 3) + ($repositoryFirst['subscribers_count'] * 2) + $repositoryFirst['stargazers_count'];
+        $rating2 = ($repositorySecond['forks'] * 3) + ($repositorySecond['subscribers_count'] * 2) + $repositorySecond['stargazers_count'];
 
         // Save best result in DB:
         if ($rating1 > $rating2) {
-            if ( ($result = BestResult::where('login', $login1)->where('repository', $repositories1_name)->first() ) == null)
+            if ( ($result = BestResult::where('login', $userFirst['login'])->where('repository', $request['repository1'])->first() ) == null) {
                 BestResult::create([
-                    'login'=>$login1, 'repository'=>$repositories1_name, 'avatar_url'=>$avatar_url1, 'rating'=>$rating1
+                    'login'=>$userFirst['login'], 'repository'=>$request['repository1'], $userFirst['avatar_url'], 'rating'=>$rating1
                 ]);
-            elseif ($result->rating != $rating1)
-                $result->update(['login'=>$login1, 'repository'=>$repositories1_name, 'avatar_url'=>$avatar_url1, 'rating'=>$rating1]);
+            }
+            elseif ($result->rating != $rating1) {
+                $result->update(['rating'=>$rating1]);
+            }
         } else {
-            if ( ($result = BestResult::where('login', $login2)->where('repository', $repositories2_name)->first() ) == null)
+            if ( ($result = BestResult::where('login', $userSecond['login'])->where('repository', $request['repository2'])->first() ) == null) {
                 BestResult::create([
-                    'login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2
+                    'login'=>$userSecond['login'], 'repository'=>$request['repository2'], $userSecond['avatar_url'], 'rating'=>$rating2
                 ]);
-            elseif ($result->rating != $rating2)
-                $result->update(['login'=>$login2, 'repository'=>$repositories2_name, 'avatar_url'=>$avatar_url2, 'rating'=>$rating2]);
+            }
+            elseif ($result->rating != $rating2) {
+                $result->update(['rating'=>$rating2]);
+            }
         }
 
-        $results = BestResult::all()->sortByDesc('rating')->take(3);
-
-        return view('pages.home', compact('avatar_url1', 'name1', 'login1', 'bio1', 'location1', 'email1', 'blog1',
-                                          'avatar_url2', 'name2', 'login2', 'bio2', 'location2', 'email2', 'blog2',
-                                          'watchers_count1',  'stargazers_count1', 'forks1', 'repositories1_name',
-                                          'watchers_count2',  'stargazers_count2', 'forks2', 'repositories2_name',
-                                          'rating1', 'rating2',
-                                          'results'
-            )
-        );
-
+        return view('pages.home', compact('userFirst', 'repositoryFirst', 'rating1', 'userSecond', 'repositorySecond', 'rating2'));
     }
+
+    public function topRepositories() {
+
+        $results = BestResult::all()->sortByDesc('rating')->take(10);
+
+        return view('pages.topRepo', compact('results'));
+    }
+
 }

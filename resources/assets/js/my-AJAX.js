@@ -13,11 +13,6 @@ function getListRepos(input) {
             // Stop fakeloader:
             $(".fakeloader").removeAttr( 'style' ).html('');
 
-            if (listRepos == 'ERROR: user not found!') {
-                $('#help-'+input).html('<strong>ERROR: user not found!</strong>');
-                return;
-            }
-
             listRepos = JSON.parse(listRepos);
 
             var option = '';
@@ -32,6 +27,8 @@ function getListRepos(input) {
         error: function (jqXHR, textStatus, errorThrown) {
             // Stop fakeloader:
             $(".fakeloader").removeAttr( 'style' ).html('');
+
+            $('#help-'+input).html('<strong>ERROR: user not found!</strong>');
 
             console.log(textStatus + ' : ' + errorThrown);
         }

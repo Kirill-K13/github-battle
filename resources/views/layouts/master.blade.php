@@ -28,7 +28,7 @@
 
 <div class="container">
     <div class="wrapper">
-
+            @include('layouts.navbar')
 
             @yield('content')
 
