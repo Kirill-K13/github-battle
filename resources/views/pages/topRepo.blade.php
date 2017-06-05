@@ -3,7 +3,7 @@
 @section('content')
     <article>
         <div class="container">
-            <table class="table table-bordered results">
+            <table class="table table-bordered topRepo">
                 <caption>Top three repository</caption>
                 <thead>
                 <tr>

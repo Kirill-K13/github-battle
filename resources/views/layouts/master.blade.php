@@ -15,6 +15,8 @@
     <link href="{{mix('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('css/my-style.css')}}" rel="stylesheet">
     <link href="{{asset('css/fake-loader.css')}}" rel="stylesheet">
+    <link href="{{asset('css/jqueryDataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,5 +42,12 @@
 <script src="{{mix('js/app.js')}}"></script>
 <script src="{{asset('js/my-AJAX.js')}}"></script>
 <script src="{{asset('js/fake-loader.min.js')}}"></script>
+<script src="{{asset('js/jqueryDataTables.min.js')}}"></script>
+<script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $('#result').DataTable();
+    } );
+</script>
 </body>
 </html>

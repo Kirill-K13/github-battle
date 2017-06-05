@@ -22,7 +22,9 @@ ul, ol {
 h3 {
     text-align: center;
 }
-
+.battle, .topRepo, .search {
+    margin-top: 70px;
+}
 /*Navbar*/
 .navbar-inverse {
     background-color: #24292e;
@@ -74,9 +76,6 @@ h3 {
 
 
 /*Content*/
-.battle {
-    margin-top: 70px;
-}
 .result {
     margin-right: 20px;
     padding-left: 8px;
@@ -145,17 +144,15 @@ h3 {
     font-weight: bold;
     text-shadow: #000000 1px 1px 0;
 }
-.results {
-    margin-top: 20px;
-}
-.results caption {
+
+.topRepo caption {
     color: #0366d6;
     text-align: center;
     font-style: italic;
     font-weight: bold;
     font-size: 1.3em;
 }
-.results tbody {
+.topRepo tbody {
     text-align: center;
 
 }
@@ -221,4 +218,13 @@ h3 {
         order: 2;
         margin: auto;
     }
+}
+
+/*Search repositori*/
+.count-search {
+    margin-bottom: 15px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
 }

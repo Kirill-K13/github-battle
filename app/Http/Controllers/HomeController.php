@@ -51,7 +51,8 @@ class HomeController extends Controller
         $search = $this->client->api('search')->repositories($request['search'], 'stars');
 
         if ($search['total_count'] == 0) {
-            return view('pages.search')->with('error_search', 'Repository not found!');
+            $error_search = 'Repository not found!';
+            return view('pages.search', compact('error_search'));
         }
 
         return view('pages.search', compact('search'));
