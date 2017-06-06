@@ -19,7 +19,7 @@ ul, ol {
     margin-top: 0;
     margin-bottom: 0;
 }
-h3 {
+h3, .center{
     text-align: center;
 }
 .battle, .topRepo, .search {
@@ -85,7 +85,7 @@ h3 {
     text-align: center;
 }
 .user1, .user2 {
-    max-width: 280px;
+
     padding: 16px;
 }
 .user-win {
@@ -93,9 +93,6 @@ h3 {
     border-radius: 5px;
     box-shadow: 0 0 15px gold;
     padding: 5px;
-}
-.avatar {
-    text-align: center;
 }
 .avatar img{
     height: 180px;

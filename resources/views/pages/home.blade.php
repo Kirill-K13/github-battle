@@ -62,9 +62,8 @@
                                 </div>
 
                                 {{--VS--}}
-                                <div class="col-xs-12 col-sm-12 col-md-2">
-                                    <img src="{{asset('images/vs2.png')}}" alt="vs" width="100"
-                                         style="margin-left: 25px">
+                                <div class="col-xs-12 col-sm-12 col-md-2 center">
+                                    <img src="{{asset('images/vs2.png')}}" alt="vs" width="100">
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-5">
@@ -114,7 +113,7 @@
                                 </div>
 
 
-                                <div class="col-xs-12" style="text-align: center">
+                                <div class="col-xs-12 center">
                                     {{--SUBMIT--}}
                                     <input type="submit" id="submit" class="buttonDanger" value="Battle!" disabled>
                                 </div>

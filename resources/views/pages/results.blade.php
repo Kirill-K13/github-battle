@@ -6,7 +6,7 @@
             <div class="user1 {{ $userFirst['win'] }}">
 
                 {{--Avatar--}}
-                <div class="avatar">
+                <div class="avatar center">
                     <img alt="{{  $userFirst['login'] }}" src="{{ $userFirst['avatar_url'] }}">
                 </div>
                 {{--Name and Login--}}
@@ -202,7 +202,7 @@
             <div class="user2 {{ $userSecond['win'] }}">
 
                 {{--Avatar--}}
-                <div class="avatar">
+                <div class="avatar center">
                     <img alt="{{ $userSecond['login'] }}" src="{{ $userSecond['avatar_url'] }}">
                 </div>
                 {{--Name and Login--}}
