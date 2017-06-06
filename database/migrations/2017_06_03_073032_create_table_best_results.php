@@ -18,6 +18,7 @@ class CreateTableBestResults extends Migration
 
             $table->string('login');
             $table->string('repository');
+            $table->string('repository_url');
             $table->string('avatar_url')->nullable();
             $table->integer('rating');
 

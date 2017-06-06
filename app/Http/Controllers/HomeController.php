@@ -94,11 +94,21 @@ class HomeController extends Controller
         $rating1 = ($repositoryFirst['forks'] * 3) + ($repositoryFirst['subscribers_count'] * 2) + $repositoryFirst['stargazers_count'];
         $rating2 = ($repositorySecond['forks'] * 3) + ($repositorySecond['subscribers_count'] * 2) + $repositorySecond['stargazers_count'];
 
+        $userFirst['win']  = '';
+        $userSecond['win'] = '';
+        $rating1 > $rating2 ? $userFirst['win'] = 'user-win' : $userSecond['win'] = 'user-win';
+
+
+
         // Save best result in DB:
         if ($rating1 > $rating2) {
             if ( ($result = BestResult::where('login', $userFirst['login'])->where('repository', $request['repository1'])->first() ) == null) {
                 BestResult::create([
-                    'login'=>$userFirst['login'], 'repository'=>$request['repository1'], $userFirst['avatar_url'], 'rating'=>$rating1
+                    'login'=>$userFirst['login'],
+                    'repository'=>$request['repository1'],
+                    'repository_url'=>$repositoryFirst ['html_url'],
+                    'avatar_url'=>$userFirst['avatar_url'],
+                    'rating'=>$rating1
                 ]);
             }
             elseif ($result->rating != $rating1) {
@@ -107,7 +117,11 @@ class HomeController extends Controller
         } else {
             if ( ($result = BestResult::where('login', $userSecond['login'])->where('repository', $request['repository2'])->first() ) == null) {
                 BestResult::create([
-                    'login'=>$userSecond['login'], 'repository'=>$request['repository2'], $userSecond['avatar_url'], 'rating'=>$rating2
+                    'login'=>$userSecond['login'],
+                    'repository'=>$request['repository2'],
+                    'repository_url'=>$repositorySecond ['html_url'],
+                    'avatar_url'=>$userSecond['avatar_url'],
+                    'rating'=>$rating2
                 ]);
             }
             elseif ($result->rating != $rating2) {

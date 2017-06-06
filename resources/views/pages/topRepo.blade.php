@@ -26,8 +26,8 @@
 
                         <td>{{ $item->login }}</td>
 
-                        <td class="description">
-                            {{ $item->repository }}
+                        <td>
+                            <a href="{{ $item->repository_url }}" target="_blank">{{ $item->repository }}</a>
                         </td>
 
                         <td>{{ $item->rating }}</td>

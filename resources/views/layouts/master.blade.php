@@ -40,14 +40,28 @@
 
 
 <script src="{{mix('js/app.js')}}"></script>
-<script src="{{asset('js/my-AJAX.js')}}"></script>
+<script src="{{asset('js/my-ajax.js')}}"></script>
 <script src="{{asset('js/fake-loader.min.js')}}"></script>
 <script src="{{asset('js/jqueryDataTables.min.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+
 <script>
     $(document).ready(function() {
         $('#result').DataTable();
     } );
+</script>
+
+<script>
+$("#login1").on("keyup", function (event) {
+   if (event.keyCode==13) {
+       $("#button-login1").get(0).click();
+   }
+});
+$("#login2").on("keyup", function (event) {
+    if (event.keyCode==13) {
+        $("#button-login2").get(0).click();
+    }
+});
 </script>
 </body>
 </html>

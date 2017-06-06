@@ -30,7 +30,7 @@
                                                        required autofocus>
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default"
-                                                            onclick="getListRepos('login1')">
+                                                            onclick="getListRepos('login1')" id="button-login1">
                                                         <span class="glyphicon glyphicon-search"
                                                               aria-hidden="true"></span>
                                                     </button>
@@ -79,7 +79,7 @@
                                                        required>
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default"
-                                                            onclick="getListRepos('login2')">
+                                                            onclick="getListRepos('login2')" id="button-login2">
                                                         <span class="glyphicon glyphicon-search"
                                                               aria-hidden="true"></span>
                                                     </button>
@@ -105,8 +105,8 @@
 
                                             @if ($errors->has('repository2'))
                                                 <span class="help-block">
-                                                        <strong>{{ $errors->first('repository2') }}</strong>
-                                                    </span>
+                                                    <strong>{{ $errors->first('repository2') }}</strong>
+                                                </span>
                                             @endif
 
                                         </div>
@@ -116,7 +116,7 @@
 
                                 <div class="col-xs-12" style="text-align: center">
                                     {{--SUBMIT--}}
-                                    <input type="submit" class="buttonDanger" value="Battle!">
+                                    <input type="submit" id="submit" class="buttonDanger" value="Battle!" disabled>
                                 </div>
                             </form>
 
