@@ -26,7 +26,7 @@ function getListRepos(input) {
             $( "#submit" ).addClass( input + "-ready" );
             var submit_class = $("#submit").attr("class");
             if (submit_class.indexOf('login1-ready') != -1 && submit_class.indexOf('login2-ready') != -1) {
-                $("#submit").prop("disabled", false);
+                $("#submit").prop("disabled", false).removeAttr('class').addClass('buttonDanger');
             }
         },
 

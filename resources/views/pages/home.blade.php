@@ -115,7 +115,7 @@
 
                                 <div class="col-xs-12 center">
                                     {{--SUBMIT--}}
-                                    <input type="submit" id="submit" class="buttonDanger" value="Battle!" disabled>
+                                    <input type="submit" id="submit" class="btn btn-default" value="Battle!" disabled>
                                 </div>
                             </form>
 
