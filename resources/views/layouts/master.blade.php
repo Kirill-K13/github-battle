@@ -58,12 +58,12 @@
 
 <script>
 $("#login1").on("keyup", function (event) {
-   if (event.keyCode==13) {
+   if (event.keyCode==13 && $("#login1").val() != '') {
        $("#button-login1").get(0).click();
    }
 });
 $("#login2").on("keyup", function (event) {
-    if (event.keyCode==13) {
+    if (event.keyCode==13 && $("#login2").val() != '') {
         $("#button-login2").get(0).click();
     }
 });

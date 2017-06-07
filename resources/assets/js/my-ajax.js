@@ -3,6 +3,10 @@ function getListRepos(input) {
     var value = $("input[name='" + input + "']").val();
     var token = $('meta[name="csrf-token"]').attr('content');
 
+    if(value == '') {
+        return;
+    }
+
     $.ajax({
 
         url: '/get-repository',
@@ -13,6 +17,9 @@ function getListRepos(input) {
 
             // Stop fakeloader:
             $(".fakeloader").removeAttr( 'style' ).html('');
+
+            //Remove help block
+            $('#help-'+input).remove();
 
             // Write data in html:
             listRepos = JSON.parse(listRepos);
