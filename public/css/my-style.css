@@ -34,6 +34,19 @@ thead > tr > td {
     font-weight: bold;
     font-size: 1.1em;
 }
+.container {
+    height: 100%;
+}
+.content {
+    min-height: 88%;
+}
+footer {
+    height: 60px;
+    border-top: 1px solid #cacaca;
+    padding-top: 20px;
+    padding-right: 10px;
+    text-align: center;
+}
 .battle, .topRepo, .search {
     margin-top: 70px;
 }

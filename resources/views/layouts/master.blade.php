@@ -29,13 +29,18 @@
 
 
 <div class="container">
-    <div class="wrapper">
-            @include('layouts.navbar')
 
-            @yield('content')
+    <div class="content">
+        @include('layouts.navbar')
 
-            <div class="fakeloader"></div>
+        @yield('content')
+
+        <div class="fakeloader"></div>
     </div>
+
+    @include('layouts.footer')
+
+
 </div>
 
 

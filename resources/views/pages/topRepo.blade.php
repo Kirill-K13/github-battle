@@ -1,9 +1,9 @@
 @extends("layouts.master")
 
 @section('content')
-    <article>
+    <article class="topRepo">
         <div class="container">
-            <table class="table table-bordered topRepo">
+            <table class="table table-bordered">
                 <caption>Top three repository</caption>
                 <thead>
                 <tr>
