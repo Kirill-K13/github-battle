@@ -24,6 +24,11 @@ class SearchGithubController extends Controller
             return view('pages.search', compact('error_search'));
         }
 
-        return view('pages.search', compact('search'));
+        // Create links for download zip:
+        foreach ($search['items'] as $item) {
+            $links[$item['id']] = substr($item['archive_url'], 0, strpos($item['archive_url'], '/{')) . '/zipball';
+        }
+
+        return view('pages.search', compact('search', 'links'));
     }
 }

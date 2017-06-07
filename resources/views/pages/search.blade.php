@@ -28,6 +28,7 @@
                             <td>
                                 <h2><a href="{{ $item['html_url'] }}" target="_blank">{{ $item['full_name'] }}</a></h2>
                                 <p>{{ $item['description'] }}</p>
+                                <p><a href="{{ $links[$item['id']] }}">Download zip</a></p>
                             </td>
                             <td>
                                 <p>{{ $item['language'] }}</p>
@@ -57,7 +58,6 @@
                                     {{ $item['stargazers_count'] }}
                                 </p>
                             </td>
-
                         </tr>
                     @endforeach
                     </tbody>

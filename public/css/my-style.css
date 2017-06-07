@@ -38,9 +38,10 @@ thead > tr > td {
     height: 100%;
 }
 .content {
-    min-height: 88%;
+    min-height: 86%;
 }
 footer {
+    margin-top: 20px;
     height: 60px;
     border-top: 1px solid #cacaca;
     padding-top: 20px;
