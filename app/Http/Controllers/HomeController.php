@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Github\Client;
 use App\Models\BestResult;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('pages.home', compact('results'));
+        return view('pages.home');
     }
 
     public function getRepositories(Request $request)
@@ -68,17 +69,15 @@ class HomeController extends Controller
             'repository2' => $repositoryRules,
         ]);
 
-        $user1 = $this->client->api('user')->find($request['login1'])['users'];
-        $user2 = $this->client->api('user')->find($request['login2'])['users'];
-        if (empty($user1) || empty($user2)) {
-            return redirect()->back()->with('error', 'ERROR: user not found!');
+        try {
+            $userFirst  = $this->client->api('user')->show($request['login1']);
+            $userSecond = $this->client->api('user')->show($request['login2']);
+
+            $repositoryFirst  = $this->client->api('repo')->show($request['login1'], $request['repository1']);
+            $repositorySecond = $this->client->api('repo')->show($request['login2'], $request['repository2']);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Whoops! Something went wrong!');
         }
-
-        $userFirst  = $this->client->api('user')->show($request['login1']);
-        $userSecond = $this->client->api('user')->show($request['login2']);
-
-        $repositoryFirst  = $this->client->api('repo')->show($request['login1'], $request['repository1']);
-        $repositorySecond = $this->client->api('repo')->show($request['login2'], $request['repository2']);
 
         $rating1 = ($repositoryFirst['forks'] * 3) + ($repositoryFirst['subscribers_count'] * 2) + $repositoryFirst['stargazers_count'];
         $rating2 = ($repositorySecond['forks'] * 3) + ($repositorySecond['subscribers_count'] * 2) + $repositorySecond['stargazers_count'];
