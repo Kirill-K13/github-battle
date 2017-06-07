@@ -35,7 +35,7 @@ class HomeController extends Controller
         //$this->client->authenticate(env('GITHUB_CLIENT_ID'), env('GITHUB_CLIENT_SECRET'), Client::AUTH_URL_CLIENT_ID);
 
         /* Password: */
-            $this->client->authenticate(env('GITHUB_USERNAME'), env('GITHUB_PASSWORD'), Client::AUTH_HTTP_PASSWORD);
+        $this->client->authenticate(env('GITHUB_USERNAME'), env('GITHUB_PASSWORD'), Client::AUTH_HTTP_PASSWORD);
 
         /* Testing requests limit */
         //dd($this->client->api('rate_limit')->getRateLimits());
@@ -45,18 +45,6 @@ class HomeController extends Controller
     public function index()
     {
         return view('pages.home', compact('results'));
-    }
-
-    public function searchGithub(Request $request) {
-        $lang = empty($request['lang']) ? '' : '+language:'.$request['lang'];
-        $search = $this->client->api('search')->repositories($request['search'] . $lang, 'forks', 'desc');
-
-        if ($search['total_count'] == 0) {
-            $error_search = 'Repository not found!';
-            return view('pages.search', compact('error_search'));
-        }
-
-        return view('pages.search', compact('search'));
     }
 
     public function getRepositories(Request $request)
@@ -70,8 +58,8 @@ class HomeController extends Controller
         return json_encode($repoNames);
     }
 
-    public function getDataRepository(Request $request) {
-
+    public function getDataRepository(Request $request)
+    {
         // Validation:
         $repositoryRules = 'required|string|not_in:Repository';
 
@@ -99,11 +87,9 @@ class HomeController extends Controller
         $userSecond['win'] = '';
         $rating1 > $rating2 ? $userFirst['win'] = 'user-win' : $userSecond['win'] = 'user-win';
 
-
-
         // Save best result in DB:
         if ($rating1 > $rating2) {
-            if ( ($result = BestResult::where('login', $userFirst['login'])->where('repository', $request['repository1'])->first() ) == null) {
+            if ( ($result = BestResult::where('login', $userFirst['login'])->where('repository', $request['repository1'])->first() ) == null ) {
                 BestResult::create([
                     'login'=>$userFirst['login'],
                     'repository'=>$request['repository1'],
@@ -115,8 +101,9 @@ class HomeController extends Controller
             elseif ($result->rating != $rating1) {
                 $result->update(['rating'=>$rating1]);
             }
-        } else {
-            if ( ($result = BestResult::where('login', $userSecond['login'])->where('repository', $request['repository2'])->first() ) == null) {
+        }
+        elseif($rating1 < $rating2) {
+            if ( ($result = BestResult::where('login', $userSecond['login'])->where('repository', $request['repository2'])->first() ) == null ) {
                 BestResult::create([
                     'login'=>$userSecond['login'],
                     'repository'=>$request['repository2'],
@@ -132,12 +119,4 @@ class HomeController extends Controller
 
         return view('pages.home', compact('userFirst', 'repositoryFirst', 'rating1', 'userSecond', 'repositorySecond', 'rating2'));
     }
-
-    public function topRepositories() {
-
-        $results = BestResult::all()->sortByDesc('rating')->take(10);
-
-        return view('pages.topRepo', compact('results'));
-    }
-
 }

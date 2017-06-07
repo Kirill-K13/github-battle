@@ -9,9 +9,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/get-repository', ['as'=>'get-repository', 'uses'=>'HomeController@getRepositories']);
     Route::post('/', ['as'=>'get-data', 'uses'=>'HomeController@getDataRepository']);
 
-    Route::post('/search', ['as'=>'search', 'uses'=>'HomeController@searchGithub']);
+    Route::post('/search', ['as'=>'search', 'uses'=>'SearchGithubController@search']);
 
-    Route::get('/top-repositories', ['as'=>'topRepo', 'uses'=>'HomeController@topRepositories']);
+    Route::get('/top-repositories', ['as'=>'topRepo', 'uses'=>'BestResultController@index']);
 
 
 });
