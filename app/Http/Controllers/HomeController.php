@@ -48,7 +48,8 @@ class HomeController extends Controller
     }
 
     public function searchGithub(Request $request) {
-        $search = $this->client->api('search')->repositories($request['search'], 'stars');
+        $lang = empty($request['lang']) ? '' : '+language:'.$request['lang'];
+        $search = $this->client->api('search')->repositories($request['search'] . $lang, 'forks', 'desc');
 
         if ($search['total_count'] == 0) {
             $error_search = 'Repository not found!';

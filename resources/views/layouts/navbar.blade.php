@@ -2,12 +2,12 @@
     <div class="container">
 
         <div class="header-search">
-            <form action="{{ route('search') }}"  method="POST">
+            <form action="{{ route('search') }}" id="search" method="POST">
                 {{ csrf_field() }}
                 <label class="form-control header-search-wrapper">
-                    <input type="text" name="search" class="form-control header-search-input" placeholder="Search repository in GitHub">
+                    <input type="text" name="search" id="search-input" class="form-control header-search-input" placeholder="Search repository in GitHub">
+                    <input type="text" name="lang"  id="lang-input" class="form-control header-search-input" placeholder="Language">
                 </label>
-
             </form>
         </div>
 

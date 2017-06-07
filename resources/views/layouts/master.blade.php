@@ -63,5 +63,19 @@ $("#login2").on("keyup", function (event) {
     }
 });
 </script>
+
+<script>
+    $("#search-input").on("keyup", function (event) {
+        if (event.keyCode==13) {
+            $("#search").submit();
+        }
+    });
+    $("#lang-input").on("keyup", function (event) {
+        if (event.keyCode==13 && $("#search-input").val() != '') {
+            $("#search").submit();
+        }
+    });
+</script>
+
 </body>
 </html>
