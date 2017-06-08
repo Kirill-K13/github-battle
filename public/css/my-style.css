@@ -48,7 +48,7 @@ footer {
     padding-right: 10px;
     text-align: center;
 }
-.battle, .topRepo, .search {
+.battle, .topRepo, .search, .subscription {
     margin-top: 70px;
 }
 
@@ -121,7 +121,7 @@ footer {
 .user-win {
     border: 1px solid grey;
     border-radius: 5px;
-    box-shadow: 0 0 15px gold;
+    box-shadow: 0 0 15px red;
     padding: 5px;
 }
 .avatar img{

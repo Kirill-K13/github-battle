@@ -16,6 +16,7 @@
 
                 <li><a href="/">HOME</a></li>
                 <li><a href="{{ route('topRepo') }}">TOP REPOSITORIES</a></li>
+                <li><a href="{{ route('subscriptions') }}">SUBSCRIPTIONS</a></li>
 
             </ul>
         </div>

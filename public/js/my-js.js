@@ -28,3 +28,10 @@ $("#lang-input").on("keyup", function (event) {
         $("#search").submit();
     }
 });
+
+$('#watch').keydown(function(event){
+    if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+    }
+});

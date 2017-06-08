@@ -13,5 +13,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/top-repositories', ['as'=>'topRepo', 'uses'=>'BestResultsController@index']);
 
+    Route::get('/subscriptions', ['as'=>'subscriptions', 'uses'=>'SubscriptionsController@index']);
+    Route::post('/add-watch', ['as'=>'add-watch', 'uses'=>'SubscriptionsController@add_watch']);
+    Route::delete('/del-watch', ['as'=>'del-watch', 'uses'=>'SubscriptionsController@del_watch']);
 
 });
