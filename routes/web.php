@@ -16,5 +16,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/subscriptions', ['as'=>'subscriptions', 'uses'=>'SubscriptionsController@index']);
     Route::post('/add-watch', ['as'=>'add-watch', 'uses'=>'SubscriptionsController@add_watch']);
     Route::delete('/del-watch', ['as'=>'del-watch', 'uses'=>'SubscriptionsController@del_watch']);
+    Route::post('/add-follow', ['as'=>'add-follow', 'uses'=>'SubscriptionsController@add_follow']);
+    Route::delete('/del-follow', ['as'=>'del-follow', 'uses'=>'SubscriptionsController@del_follow']);
 
 });

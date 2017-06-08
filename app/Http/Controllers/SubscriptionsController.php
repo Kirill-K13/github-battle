@@ -16,10 +16,20 @@ class SubscriptionsController extends Controller
 
     public function index()
     {
-        $watch = $this->client->api('current_user')->watchers()->all();
+        // Get repositories watchers
+        $repositories = $this->client->api('current_user')->watchers()->all();
+        // Get users following
+        $users = $this->client->api('current_user')->follow()->all();
 
-        return view('pages.subscription', compact('watch'));
+        //$test = $this->client->api('notification')->all();
+
+        //$test = $this->client->api('notification')->all();
+
+        //dd($test);
+        return view('pages.subscription', compact('repositories', 'users'));
     }
+
+
 
     public function add_watch(Request $request)
     {
@@ -49,13 +59,20 @@ class SubscriptionsController extends Controller
        return redirect()->back();
     }
 
-    public function follow()
+    public function add_follow(Request $request)
     {
-        // Create subscribe:
 
-        // Show:
+       $this->client->api('current_user')->follow()->follow($request['login']);
+
+        return redirect()->back();
+    }
+
+    public function del_follow(Request $request)
+    {
 
         // Remove subscribe:
-        // $this->client->api('current_user')->follow()->unfollow('symfony');
+        $this->client->api('current_user')->follow()->unfollow($request['login']);
+
+        return redirect()->back();
     }
 }
