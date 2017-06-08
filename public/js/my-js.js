@@ -19,7 +19,7 @@ $("#login2").on("keyup", function (event) {
 
 // Setting form search repository in Github
 $("#search-input").on("keyup", function (event) {
-    if (event.keyCode==13) {
+    if (event.keyCode==13 && $("#search-input").val() != '') {
         $("#search").submit();
     }
 });

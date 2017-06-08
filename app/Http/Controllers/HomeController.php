@@ -84,7 +84,9 @@ class HomeController extends Controller
 
         $userFirst['win']  = '';
         $userSecond['win'] = '';
-        $rating1 > $rating2 ? $userFirst['win'] = 'user-win' : $userSecond['win'] = 'user-win';
+        if ($rating1 != $rating2) {
+            $rating1 > $rating2 ? $userFirst['win'] = 'user-win' : $userSecond['win'] = 'user-win';
+        }
 
         // Save best result in DB:
         if ($rating1 > $rating2) {
