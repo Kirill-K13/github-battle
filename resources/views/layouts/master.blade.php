@@ -46,41 +46,10 @@
 
 <script src="{{mix('js/app.js')}}"></script>
 <script src="{{asset('js/my-ajax.js')}}"></script>
+<script src="{{asset('js/my-js.js')}}"></script>
 <script src="{{asset('js/fake-loader.min.js')}}"></script>
 <script src="{{asset('js/jqueryDataTables.min.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#result').DataTable();
-    } );
-</script>
-
-<script>
-$("#login1").on("keyup", function (event) {
-   if (event.keyCode==13 && $("#login1").val() != '') {
-       $("#button-login1").get(0).click();
-   }
-});
-$("#login2").on("keyup", function (event) {
-    if (event.keyCode==13 && $("#login2").val() != '') {
-        $("#button-login2").get(0).click();
-    }
-});
-</script>
-
-<script>
-    $("#search-input").on("keyup", function (event) {
-        if (event.keyCode==13) {
-            $("#search").submit();
-        }
-    });
-    $("#lang-input").on("keyup", function (event) {
-        if (event.keyCode==13 && $("#search-input").val() != '') {
-            $("#search").submit();
-        }
-    });
-</script>
 
 </body>
 </html>

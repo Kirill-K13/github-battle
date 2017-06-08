@@ -21,8 +21,9 @@
 
                                     {{--LOGIN1--}}
                                     <div class="form-group">
-                                        <label for="login1" class="col-xs-12 col-md-6 control-label pull-left">User-1
-                                            Login:</label>
+                                        <label for="login1" class="col-xs-12 col-md-6 control-label pull-left">
+                                            User-1 Login:
+                                        </label>
                                         <div class="col-md-6">
 
                                             <div class="input-group">
@@ -43,8 +44,9 @@
 
                                     {{--REPOSITORY1--}}
                                     <div class="form-group{{ $errors->has('repository1') ? ' has-error' : '' }}">
-                                        <label for="repository1" class="col-md-6 control-label">Choose
-                                            repository:</label>
+                                        <label for="repository1" class="col-md-6 control-label">
+                                            Choose repository:
+                                        </label>
 
                                         <div class="col-md-6">
                                             <select class="form-control" id="list-login1" name="repository1">
@@ -69,7 +71,9 @@
                                 <div class="col-xs-12 col-sm-12 col-md-5">
                                     {{--LOGIN2--}}
                                     <div class="form-group">
-                                        <label for="login2" class="col-md-6 control-label">User-2 Login:</label>
+                                        <label for="login2" class="col-md-6 control-label">
+                                            User-2 Login:
+                                        </label>
 
                                         <div class="col-md-6">
 
