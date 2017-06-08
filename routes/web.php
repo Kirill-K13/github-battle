@@ -11,7 +11,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/search', ['as'=>'search', 'uses'=>'SearchGithubController@search']);
 
-    Route::get('/top-repositories', ['as'=>'topRepo', 'uses'=>'BestResultController@index']);
+    Route::get('/top-repositories', ['as'=>'topRepo', 'uses'=>'BestResultsController@index']);
 
 
 });

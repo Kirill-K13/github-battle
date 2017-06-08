@@ -17,7 +17,7 @@ class SearchGithubController extends Controller
     public function search(Request $request)
     {
         $lang = empty($request['lang']) ? '' : '+language:'.$request['lang'];
-        $search = $this->client->api('search')->repositories($request['search'] . $lang, 'forks', 'desc');
+        $search = $this->client->api('search')->repositories($request['search'] . $lang, 'stars', 'desc');
 
         if ($search['total_count'] == 0) {
             $error_search = 'Repository not found!';

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BestResult;
 
-class BestResultController extends Controller
+class BestResultsController extends Controller
 {
     public function index()
     {
