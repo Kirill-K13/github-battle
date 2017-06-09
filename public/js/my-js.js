@@ -16,6 +16,13 @@ $("#login2").on("keyup", function (event) {
     }
 });
 
+// Setting button search login for subscribe
+$("#login").on("keyup", function (event) {
+    if (event.keyCode==13 && $("#login").val() != '') {
+        $("#button-login").get(0).click();
+    }
+});
+
 
 // Setting form search repository in Github
 $("#search-input").on("keyup", function (event) {
@@ -26,12 +33,5 @@ $("#search-input").on("keyup", function (event) {
 $("#lang-input").on("keyup", function (event) {
     if (event.keyCode==13 && $("#search-input").val() != '') {
         $("#search").submit();
-    }
-});
-
-$('#watch').keydown(function(event){
-    if(event.keyCode == 13) {
-        event.preventDefault();
-        return false;
     }
 });

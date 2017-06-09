@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Exception;
 use \Github\Client;
 
 class SubscriptionsController extends Controller
 {
     public function __construct()
     {
-
         $this->client = new Client;
         $this->client->authenticate(env('GITHUB_USERNAME'), env('GITHUB_PASSWORD'), Client::AUTH_HTTP_PASSWORD);
     }
@@ -21,15 +21,8 @@ class SubscriptionsController extends Controller
         // Get users following
         $users = $this->client->api('current_user')->follow()->all();
 
-        //$test = $this->client->api('notification')->all();
-
-        //$test = $this->client->api('notification')->all();
-
-        //dd($test);
         return view('pages.subscription', compact('repositories', 'users'));
     }
-
-
 
     public function add_watch(Request $request)
     {
@@ -61,15 +54,18 @@ class SubscriptionsController extends Controller
 
     public function add_follow(Request $request)
     {
-
-       $this->client->api('current_user')->follow()->follow($request['login']);
+        // Create subscribe:
+        try {
+            $this->client->api('current_user')->follow()->follow($request['login']);
+        } catch (Exception $e) {
+            return redirect()->back()->with('userError', 'ERROR: user not found!');
+        }
 
         return redirect()->back();
     }
 
     public function del_follow(Request $request)
     {
-
         // Remove subscribe:
         $this->client->api('current_user')->follow()->unfollow($request['login']);
 
