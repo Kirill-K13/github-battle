@@ -27,4 +27,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/css/dataTables.bootstrap.min.css', 'public/css')
     .copy('resources/assets/css/jqueryDataTables.min.css', 'public/css')
 
+    .copy('resources/assets/css/stripe-form.css', 'public/css')
+    .copy('resources/assets/js/stripe.js', 'public/js')
+
     .copyDirectory('resources/assets/images', 'public/images');

@@ -1,10 +1,10 @@
 <?php
 
-Route::group(['middleware' => 'web'], function () {
+Auth::routes();
+
+Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index']);
-
-
 
     Route::post('/get-repository', ['as'=>'get-repository', 'uses'=>'HomeController@getRepositories']);
     Route::post('/', ['as'=>'get-data', 'uses'=>'HomeController@getDataRepository']);
@@ -19,4 +19,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/add-follow', ['as'=>'add-follow', 'uses'=>'SubscriptionsController@add_follow']);
     Route::delete('/del-follow', ['as'=>'del-follow', 'uses'=>'SubscriptionsController@del_follow']);
 
+    Route::get('/stripe', ['as'=>'stripe', 'uses'=>'StripeController@index']);
+    Route::post('/test-stripe', ['as'=>'test', 'uses'=>'StripeController@test']);
+
 });
+
+
+
+

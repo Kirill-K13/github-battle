@@ -17,6 +17,7 @@
     <link href="{{asset('css/fake-loader.css')}}" rel="stylesheet">
     <link href="{{asset('css/jqueryDataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/stripe-form.css')}}" rel="stylesheet">
 
     <link href="{{asset('images/favicon.ico')}}" rel="shortcut icon" type="image/x-icon">
 
@@ -52,6 +53,7 @@
 <script src="{{asset('js/fake-loader.min.js')}}"></script>
 <script src="{{asset('js/jqueryDataTables.min.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('js/stripe.js')}}"></script>
 
 </body>
 </html>

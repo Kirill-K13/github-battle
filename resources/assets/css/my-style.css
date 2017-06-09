@@ -48,7 +48,7 @@ footer {
     padding-right: 10px;
     text-align: center;
 }
-.battle, .topRepo, .search, .subscription {
+.battle, .topRepo, .search, .subscription, .stripe {
     margin-top: 70px;
 }
 

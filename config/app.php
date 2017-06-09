@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
         /*
          * Package Service Providers...
          */
