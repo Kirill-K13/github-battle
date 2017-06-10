@@ -28,10 +28,10 @@
 
                                             <div class="input-group">
                                                 <input id="login1" type="text" class="form-control" name="login1"
-                                                       required autofocus>
+                                                       required autofocus {{ $access }}>
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default"
-                                                            onclick="getListRepos('login1')" id="button-login1">
+                                                            onclick="getListRepos('login1')" id="button-login1" {{ $access }}>
                                                         <span class="glyphicon glyphicon-search"
                                                               aria-hidden="true"></span>
                                                     </button>
@@ -49,7 +49,7 @@
                                         </label>
 
                                         <div class="col-md-6">
-                                            <select class="form-control" id="list-login1" name="repository1">
+                                            <select class="form-control" id="list-login1" name="repository1" {{ $access }}>
                                                 <option>Repository</option>
                                             </select>
 
@@ -79,10 +79,10 @@
 
                                             <div class="input-group">
                                                 <input id="login2" type="text" class="form-control" name="login2"
-                                                       required>
+                                                       required {{ $access }}>
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default"
-                                                            onclick="getListRepos('login2')" id="button-login2">
+                                                            onclick="getListRepos('login2')" id="button-login2" {{ $access }}>
                                                         <span class="glyphicon glyphicon-search"
                                                               aria-hidden="true"></span>
                                                     </button>
@@ -102,7 +102,7 @@
 
                                         <div class="col-md-6">
 
-                                            <select class="form-control" id="list-login2" name="repository2">
+                                            <select class="form-control" id="list-login2" name="repository2" {{ $access }}>
                                                 <option>Repository</option>
                                             </select>
 
@@ -126,6 +126,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-xs-12">
+
+                    @if( !$is_subscribed )
+                        <h3 class="text-danger">The features of this web application are not available! <br>
+                            <small>You need to <a href="{{ route('area') }}">subscription</a> to keep your application running!</small>
+                        </h3>
+                    @endif
+
+                </div>
+
             </div>
         </div>
     </article>

@@ -7,6 +7,8 @@ use \Github\Client;
 use App\Models\BestResult;
 use Exception;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     protected $client;
@@ -45,7 +47,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('pages.home');
+        // Check is subscribed
+        $is_subscribed = Auth::user()->subscribed('main');
+        $access = $is_subscribed ? '' : 'disabled';
+
+        return view('pages.home', compact('access', 'is_subscribed'));
     }
 
     public function getRepositories(Request $request)
@@ -120,4 +126,6 @@ class HomeController extends Controller
 
         return view('pages.home', compact('userFirst', 'repositoryFirst', 'rating1', 'userSecond', 'repositorySecond', 'rating2'));
     }
+
+
 }

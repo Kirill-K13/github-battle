@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Laravel\Cashier\Billable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Cashier\Billable;
+use Stripe\Subscription;
 
 class User extends Authenticatable
 {
@@ -29,9 +30,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    //Relationships:
-    public function subscription()
-    {
-        return $this->hasOne(Subscription::class);
-    }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Exception;
 use \Github\Client;
 
-class SubscriptionsController extends Controller
+class TrackingController extends Controller
 {
     public function __construct()
     {
@@ -21,7 +21,7 @@ class SubscriptionsController extends Controller
         // Get users following
         $users = $this->client->api('current_user')->follow()->all();
 
-        return view('pages.subscription', compact('repositories', 'users'));
+        return view('pages.tracking', compact('repositories', 'users'));
     }
 
     public function add_watch(Request $request)
