@@ -6,13 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "doctrine/dbal": "*",
+        "dompdf/dompdf": "^0.8.0",
         "knplabs/github-api": "^2.4",
         "laravel/cashier": "~7.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "php-http/guzzle6-adapter": "^1.1",
-        "doctrine/dbal": "*"
-
+        "php-http/guzzle6-adapter": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

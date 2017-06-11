@@ -22,8 +22,20 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/personal-area', ['as'=>'area', 'uses'=>'AreaController@index']);
 
     Route::get('/plan/{id}', ['as'=>'plan', 'uses'=>'PlanController@show']);
+    Route::post('/subscribe', ['as'=>'subscribe', 'uses'=>'PlanController@subscribe']);
+    Route::get('/cancel',  ['as'=>'confirmCancellation', 'uses'=>'PlanController@confirmCancellation']);
+    Route::post('/cancel', ['as'=>'subscriptionCancel', 'uses'=>'PlanController@cancelSubscription']);
+    Route::post('/resume', ['as'=>'subscriptionResume', 'uses'=>'PlanController@resumeSubscription']);
+
+    Route::get('/invoices', ['as'=>'invoices', 'uses'=>'InvoiceController@index']);
+    Route::get('/invoice/{id}', ['as'=>'downloadInvoice', 'uses'=>'InvoiceController@download']);
+
 });
 
 
 
-
+// Handling Stripe Webhooks
+Route::post(
+    'stripe/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
