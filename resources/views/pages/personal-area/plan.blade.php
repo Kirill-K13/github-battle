@@ -14,9 +14,9 @@
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
-                                <li class="list-group-item">+ Unlimited SSD Disk Space</li>
-                                <li class="list-group-item">+ Unlimited Bandwidth</li>
-                                <li class="list-group-item">+ Unlimited MySQL Databases</li>
+                                @for($i = 1; isset($plan->metadata['advantage-'.$i]); $i++)
+                                    <li class="list-group-item">{{ $plan->metadata['advantage-'.$i] }}</li>
+                                @endfor
                             </ul>
                         </div>
                     </div>

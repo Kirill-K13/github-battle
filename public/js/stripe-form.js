@@ -35,7 +35,7 @@ var card = elements.create('card', {
 // Add an instance of the card Element into the `card-element` <div>
 card.mount('#card-element');
 
-// Show errors for onchange input
+// Show errors for onchange
 card.addEventListener('change', function(event) {
     var displayError = document.getElementById('card-errors');
     if (event.error) {
