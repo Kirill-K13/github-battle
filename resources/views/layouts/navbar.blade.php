@@ -22,7 +22,19 @@
                     <li><a href="{{ route('home') }}">HOME</a></li>
                     <li><a href="{{ route('topRepo') }}">TOP REPOSITORIES</a></li>
                     <li><a href="{{ route('tracking') }}">EVENT TRACKING</a></li>
-                    <li><a href="{{ route('cabinet') }}">PERSONAL AREA</a></li>
+                    <li><a href="{{ route('cabinet') }}"></a></li>
+
+                    <li class="dropdown pull-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            PERSONAL AREA <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ route('cabinet') }}">CABINET</a></li>
+                            <li><a href="{{ route('invoices') }}">INVOICES</a></li>
+                        </ul>
+
+                    </li>
 
                     <li class="dropdown pull-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

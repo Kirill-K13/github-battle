@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PersonalArea;
 
+use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,6 @@ class PlanController extends Controller
         // User chosen plan
         $pickedPlan = $request->get('plan');
 
-
-        // Current logged in user
         $user = Auth::user();
 
         try {
@@ -40,18 +39,15 @@ class PlanController extends Controller
                 $user->subscription('main')->swap($pickedPlan);
 
             } else {
-                // Its new subscription
-
                 // Create subscription
-                //dd($request->get('stripeToken'));
 
+                //dd($request->get('stripeToken'));
                 $user->newSubscription('main', $pickedPlan)->create($request->get('stripeToken'), [
                     'email' => $user->email,
                 ]);
             }
         } catch (\Exception $e) {
 
-            // Catch any error from Stripe API request and show
             return redirect()->back()->withErrors(['status' => $e->getMessage()]);
         }
 
@@ -93,7 +89,7 @@ class PlanController extends Controller
     {
         $plans = Plan::getStripePlans();
 
-        if ( ! $plans ) {
+        if ( !$plans ) {
             throw new NotFoundHttpException;
         }
 

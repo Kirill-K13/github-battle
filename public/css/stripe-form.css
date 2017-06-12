@@ -1,28 +1,47 @@
+.plan .panel-primary > .panel-heading {
+    background-color: #1b1738;
+    border-color: #1800ff;
+}
 .stripe-form {
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 19px;
     font-variant: normal;
-    background: #585e91;
+    background: #5c5d65;
 }
 .stripe-form label{
     color: white;
 }
+.stripe-form .btn-primary {
+    border: 1px solid #000000;
+    border-radius: 3px;
+    background-color: #5779ff;
+    color: black;
+    transition: .5s;
+}
+.stripe-form .btn-primary:hover {
+    border: 1px solid white;
+    border-radius: 3px;
+    background-color: #1800ff;
+    color: white;
+    transition: .9s;
+}
 .StripeElement {
     background-color: #8992de;
-    padding: 8px 12px;
+    padding: 5px 12px;
     border-radius: 4px;
     border: 1px solid transparent;
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
 }
-
+#card-errors {
+    color: red;
+}
 .StripeElement--focus {
     box-shadow: 0 1px 3px 0 #cfd7df;
 }
-
 .StripeElement--invalid {
-    border-color: #fa755a;
+    border-color: red;
 }
 
 .StripeElement--webkit-autofill {

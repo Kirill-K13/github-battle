@@ -15,9 +15,10 @@ class Subscribed
      */
     public function handle($request, Closure $next)
     {
+
         if ($request->user() && ! $request->user()->subscribed('main')) {
             // This user is not a paying customer...
-            return redirect('area');
+            return redirect()->route('cabinet');
         }
         return $next($request);
     }

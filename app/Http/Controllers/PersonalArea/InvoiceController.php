@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PersonalArea;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class InvoiceController extends Controller
 {
@@ -17,8 +19,8 @@ class InvoiceController extends Controller
     public function index()
     {
         try {
-            $invoices = Auth::user()->invoicesIncludingPending();
-        } catch ( \Exception $e ) {
+            $invoices = Auth::user()->invoices();
+        } catch (Exception $e) {
             session()->flash('status', $e->getMessage());
         }
         return view('pages.personal-area.invoice', compact('invoices'));

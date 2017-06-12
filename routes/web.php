@@ -20,19 +20,18 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/del-follow', ['as'=>'del-follow', 'uses'=>'TrackingController@del_follow']);
 
 
-    Route::get('/personal-area', ['as'=>'cabinet', 'uses'=>'AreaController@index']);
+    Route::get('/personal-area', ['as'=>'cabinet', 'uses'=>'PersonalArea\CabinetController@index']);
 
-    Route::get('/plan/{id}', ['as'=>'plan', 'uses'=>'PlanController@show']);
-    Route::post('/subscribe', ['as'=>'subscribe', 'uses'=>'PlanController@subscribe']);
-    Route::get('/cancel',  ['as'=>'confirmCancellation', 'uses'=>'PlanController@confirmCancellation']);
-    Route::post('/cancel', ['as'=>'subscriptionCancel', 'uses'=>'PlanController@cancelSubscription']);
-    Route::post('/resume', ['as'=>'subscriptionResume', 'uses'=>'PlanController@resumeSubscription']);
+    Route::get('/plan/{id}', ['as'=>'plan', 'uses'=>'PersonalArea\PlanController@show']);
+    Route::post('/subscribe', ['as'=>'subscribe', 'uses'=>'PersonalArea\PlanController@subscribe']);
+    Route::get('/cancel',  ['as'=>'confirmCancellation', 'uses'=>'PersonalArea\PlanController@confirmCancellation']);
+    Route::post('/cancel', ['as'=>'subscriptionCancel', 'uses'=>'PersonalArea\PlanController@cancelSubscription']);
+    Route::post('/resume', ['as'=>'subscriptionResume', 'uses'=>'PersonalArea\PlanController@resumeSubscription']);
 
-    Route::get('/invoices', ['as'=>'invoices', 'uses'=>'InvoiceController@index']);
-    Route::get('/invoice/{id}', ['as'=>'downloadInvoice', 'uses'=>'InvoiceController@download']);
+    Route::get('/invoices', ['as'=>'invoices', 'uses'=>'PersonalArea\InvoiceController@index']);
+    Route::get('/invoice/{id}', ['as'=>'downloadInvoice', 'uses'=>'PersonalArea\InvoiceController@download']);
 
 });
-
 
 
 // Handling Stripe Webhooks

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PersonalArea;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Plan;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
 
-class AreaController extends Controller
+class CabinetController extends Controller
 {
     public function index()
     {

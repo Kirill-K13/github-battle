@@ -4,8 +4,6 @@
 
     <article class="cabinet">
 
-        <a href="{{ route('invoices') }}">Invoices</a>
-
         @if( $is_subscribed )
 
             <h3 class="text-success">
@@ -24,13 +22,16 @@
 
         @foreach($plans as $plan)
             <div class="col-sm-4">
+
                 <div class="panel {{ ( $is_subscribed && $subscription->stripe_plan ==  $plan->id ) ? 'panel-success' :  'panel-primary' }}">
+
                     <div class="panel-heading text-uppercase">
                         {{ $plan->id }}
                         @if( $is_subscribed &&  ( $subscription->stripe_plan ==  $plan->id ) )
                             <a href="{{ route('confirmCancellation') }}" class="btn btn-danger btn-sm pull-right" style="margin-top: -3px">Cancel Subscription</a>
                         @endif
                     </div>
+
                     <div class="panel-body center">
                         <h3 class="modal-title">
                             {{ $plan->name }}
@@ -40,6 +41,7 @@
 
                         <p>{{ $plan->currency }} {{ $plan->amount / 100 }} / {{ $plan->interval }}</p>
                     </div>
+
                     <div class="panel-footer">
                         @if( $is_subscribed &&  ( $subscription->stripe_plan ==  $plan->id ) )
                             <a href="#" class="btn btn-default btn-block">
@@ -51,12 +53,14 @@
                             </a>
                         @endif
                     </div>
+
                 </div>
+
             </div>
         @endforeach
 
         @if( $is_subscribed && $subscription->onGracePeriod())
-
+            <div class="col-xs-12">
                 <div class="alert alert-warning">
 
                     <h3 class="modal-title">
@@ -68,7 +72,7 @@
                     </h3>
 
                 </div>
-
+            </div>
         @endif
 
         @if (session('status'))

@@ -5,7 +5,24 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0">
+
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-uppercase">
+                            {{ $plan->statement_descriptor }}
+                            <span class="pull-right">{{ $plan->currency }} {{ $plan->amount / 100 }} / {{ $plan->interval }}</span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">+ Unlimited SSD Disk Space</li>
+                                <li class="list-group-item">+ Unlimited Bandwidth</li>
+                                <li class="list-group-item">+ Unlimited MySQL Databases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="col-xs-12 center">
 
                         @if (count($errors) > 0)

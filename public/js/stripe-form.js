@@ -29,11 +29,13 @@ var card = elements.create('card', {
         focus: 'is-focused',
         empty: 'is-empty',
     },
+    hidePostalCode: true,
 });
 
 // Add an instance of the card Element into the `card-element` <div>
 card.mount('#card-element');
 
+// Show errors for onchange input
 card.addEventListener('change', function(event) {
     var displayError = document.getElementById('card-errors');
     if (event.error) {
@@ -46,8 +48,9 @@ card.addEventListener('change', function(event) {
 // Create a token or display an error when the form is submitted.
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
+    // Cancel submit form
     event.preventDefault();
-
+    // Create token in Stripe
     stripe.createToken(card).then(function(result) {
         if (result.error) {
             // Inform the user if there was an error
@@ -60,6 +63,7 @@ form.addEventListener('submit', function(event) {
     });
 });
 
+// Generate input name="stripeToken" + Submit form
 function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
     var form = document.getElementById('payment-form');
