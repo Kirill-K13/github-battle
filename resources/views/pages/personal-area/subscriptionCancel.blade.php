@@ -19,7 +19,7 @@
 
                             <form action="{{ route('subscriptionCancel') }}" method="post">
                                 {{ csrf_field() }}
-                                <p><a href="{{ route('area') }}" class="btn btn-link">No, I wanted to Stay</a></p>
+                                <p><a href="{{ route('cabinet') }}" class="btn btn-link">No, I wanted to Stay</a></p>
                                 <button type="submit" class="btn btn-lg btn-danger">Please Cancel It</button>
                             </form>
 

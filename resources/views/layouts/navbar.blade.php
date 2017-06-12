@@ -22,7 +22,7 @@
                     <li><a href="{{ route('home') }}">HOME</a></li>
                     <li><a href="{{ route('topRepo') }}">TOP REPOSITORIES</a></li>
                     <li><a href="{{ route('tracking') }}">EVENT TRACKING</a></li>
-                    <li><a href="{{ route('area') }}">PERSONAL AREA</a></li>
+                    <li><a href="{{ route('cabinet') }}">PERSONAL AREA</a></li>
 
                     <li class="dropdown pull-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -131,7 +131,7 @@
 
                     @if( !$is_subscribed )
                         <h3 class="text-danger">The features of this web application are not available! <br>
-                            <small>You need to <a href="{{ route('area') }}">subscription</a> to keep your application running!</small>
+                            <small>You need to <a href="{{ route('cabinet') }}">subscription</a> to keep your application running!</small>
                         </h3>
                     @endif
 
@@ -141,6 +141,6 @@
         </div>
     </article>
 
-@include('pages.results')
+@include('pages.home.results')
 
 @endsection

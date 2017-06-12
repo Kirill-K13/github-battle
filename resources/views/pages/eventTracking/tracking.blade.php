@@ -23,9 +23,9 @@
 
                             <div class="input-group">
                                 <input id="login" type="text" class="form-control" name="login" placeholder="Login:"
-                                       required autofocus>
+                                       required autofocus {{ $access }}>
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" onclick="getListRepos('login')" id="button-login">
+                                    <button type="button" class="btn btn-default" onclick="getListRepos('login')" id="button-login" {{ $access }}>
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </button>
                                 </span>
@@ -35,7 +35,7 @@
                             {{--REPOSITORY--}}
                             <div class="form-group{{ $errors->has('repository') ? ' has-error' : '' }}">
 
-                                <select class="form-control" id="list-login" name="repository">
+                                <select class="form-control" id="list-login" name="repository" {{ $access }}>
                                     <option>Choose repository</option>
                                 </select><br>
 
@@ -60,7 +60,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <input type="hidden" name="full_name" value="{{ $item['full_name'] }}">
-                                        <input type="submit" value="Delete" class="buttonDanger" style="margin-top: -12px">
+                                        <input type="submit" value="Delete" class="buttonDanger" {{ $access }} style="margin-top: -12px">
                                     </form>
                                 </li>
                             @endforeach
@@ -87,9 +87,9 @@
                         <span class="help-block" id="help-login"></span>
 
                         <div class="input-group">
-                            <input id="login" type="text" class="form-control" name="login" placeholder="Login:" required autofocus>
+                            <input id="login" type="text" class="form-control" name="login" placeholder="Login:" required autofocus {{ $access }}>
                             <span class="input-group-btn">
-                                <input type="submit" class="btn btn-primary" value="Add">
+                                <input type="submit" class="btn btn-primary" value="Add" {{ $access }}>
                             </span>
                         </div>
                     </form>
@@ -104,7 +104,7 @@
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <input type="hidden" name="login" value="{{ $user['login'] }}">
-                                    <input type="submit" value="Delete" class="buttonDanger" style="margin-top: -12px">
+                                    <input type="submit" value="Delete" class="buttonDanger" {{ $access }} style="margin-top: -12px">
                                 </form>
                             </li>
                         @endforeach
@@ -112,6 +112,16 @@
 
                 </div>
             </div>
+        </div>
+
+        <div class="col-xs-12">
+
+            @if( !$is_subscribed )
+                <h3 class="text-danger">The features of this web application are not available! <br>
+                    <small>You need to <a href="{{ route('cabinet') }}">subscription</a> to keep your application running!</small>
+                </h3>
+            @endif
+
         </div>
 
 

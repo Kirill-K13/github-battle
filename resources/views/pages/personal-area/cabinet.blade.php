@@ -2,25 +2,25 @@
 
 @section('content')
 
-<article class="stripe">
+    <article class="cabinet">
 
-    <a href="{{ route('invoices') }}">Invoices</a>
+        <a href="{{ route('invoices') }}">Invoices</a>
 
-    @if( $is_subscribed )
+        @if( $is_subscribed )
 
-        <h3 class="text-success">
-            You are subscribed and you can use this application.
-        </h3>
-        <hr>
+            <h3 class="text-success">
+                You are subscribed and you can use this application.
+            </h3>
+            <hr>
 
-    @else
+        @else
 
-        <h3 class="text-danger">The features of this web application are not available! <br>
-            <small>You need to <strong>subscription</strong> to keep your application running:</small>
-        </h3>
-        <hr>
+            <h3 class="text-danger">The features of this web application are not available! <br>
+                <small>You need to <strong>subscription</strong> to keep your application running:</small>
+            </h3>
+            <hr>
 
-    @endif
+        @endif
 
         @foreach($plans as $plan)
             <div class="col-sm-4">
@@ -55,10 +55,10 @@
             </div>
         @endforeach
 
-        @if( $is_subscribed )
-            @if( $subscription->onGracePeriod() )
+        @if( $is_subscribed && $subscription->onGracePeriod())
 
                 <div class="alert alert-warning">
+
                     <h3 class="modal-title">
                         Subscription expiring at {{ $subscription->ends_at->toFormattedDateString() }} <br>
                         <form method="post" action="{{ route('subscriptionResume') }}">
@@ -68,9 +68,7 @@
                     </h3>
 
                 </div>
-            @else
 
-            @endif
         @endif
 
         @if (session('status'))
@@ -84,6 +82,6 @@
             </div>
         @endif
 
-</article>
+    </article>
 
 @endsection

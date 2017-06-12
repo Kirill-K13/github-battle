@@ -15,7 +15,7 @@ class PlanController extends Controller
         // get the plan by id from cache
         $plan = $this->getPlanByIdOrFail($id);
 
-        return view('pages.plan', compact('plan'));
+        return view('pages.personal-area.plan', compact('plan'));
     }
 
 
@@ -45,7 +45,9 @@ class PlanController extends Controller
                 // Create subscription
                 //dd($request->get('stripeToken'));
 
-                $user->newSubscription('main', $pickedPlan)->create($request->get('stripeToken'));
+                $user->newSubscription('main', $pickedPlan)->create($request->get('stripeToken'), [
+                    'email' => $user->email,
+                ]);
             }
         } catch (\Exception $e) {
 
@@ -53,12 +55,12 @@ class PlanController extends Controller
             return redirect()->back()->withErrors(['status' => $e->getMessage()]);
         }
 
-        return redirect()->route('area')->with('status', 'You are now subscribed to ' . $pickedPlan . ' plan.');
+        return redirect()->route('cabinet')->with('status', 'You are now subscribed to ' . $pickedPlan . ' plan.');
     }
 
     public function confirmCancellation()
     {
-        return view('pages.subscriptionCancel');
+        return view('pages.personal-area.subscriptionCancel');
     }
 
     public function cancelSubscription(Request $request)
@@ -66,9 +68,9 @@ class PlanController extends Controller
         try {
             $request->user()->subscription('main')->cancel();
         } catch ( \Exception $e) {
-            return redirect()->route('area')->with('status', $e->getMessage());
+            return redirect()->route('cabinet')->with('status', $e->getMessage());
         }
-        return redirect()->route('area')->with('status',
+        return redirect()->route('cabinet')->with('status',
             'Your Subscription has been canceled.'
         );
     }
@@ -79,9 +81,9 @@ class PlanController extends Controller
         try {
             $request->user()->subscription('main')->resume();
         } catch ( \Exception $e) {
-            return redirect()->route('area')->with('status', $e->getMessage());
+            return redirect()->route('cabinet')->with('status', $e->getMessage());
         }
-        return redirect()->route('area')->with('status',
+        return redirect()->route('cabinet')->with('status',
             'Glad to see you back. Your Subscription has been resumed.'
         );
     }

@@ -22,6 +22,6 @@ class AreaController extends Controller
         // If subscribed get the subscription
         $subscription = Auth::user()->subscription('main');
 
-        return view('pages.area', compact('plans', 'is_subscribed', 'subscription'));
+        return view('pages.personal-area.cabinet', compact('plans', 'is_subscribed', 'subscription'));
     }
 }

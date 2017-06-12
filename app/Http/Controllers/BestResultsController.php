@@ -10,6 +10,6 @@ class BestResultsController extends Controller
     {
         $results = BestResult::all()->sortByDesc('rating')->take(10);
 
-        return view('pages.topRepo', compact('results'));
+        return view('pages.topRepositories.topRepo', compact('results'));
     }
 }

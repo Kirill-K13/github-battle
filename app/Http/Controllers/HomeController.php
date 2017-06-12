@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use \Github\Client;
 use App\Models\BestResult;
 use Exception;
-
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -51,7 +50,7 @@ class HomeController extends Controller
         $is_subscribed = Auth::user()->subscribed('main');
         $access = $is_subscribed ? '' : 'disabled';
 
-        return view('pages.home', compact('access', 'is_subscribed'));
+        return view('pages.home.home', compact('access', 'is_subscribed'));
     }
 
     public function getRepositories(Request $request)
@@ -67,6 +66,13 @@ class HomeController extends Controller
 
     public function getDataRepository(Request $request)
     {
+        // Check is subscribed
+        $is_subscribed = Auth::user()->subscribed('main');
+        $access = $is_subscribed ? '' : 'disabled';
+        if(!$is_subscribed) {
+            return redirect()->back();
+        }
+
         // Validation:
         $repositoryRules = 'required|string|not_in:Repository';
 
@@ -124,7 +130,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('pages.home', compact('userFirst', 'repositoryFirst', 'rating1', 'userSecond', 'repositorySecond', 'rating2'));
+        return view('pages.home.home', compact('userFirst', 'repositoryFirst', 'rating1', 'userSecond', 'repositorySecond', 'rating2', 'access', 'is_subscribed'));
     }
 
 

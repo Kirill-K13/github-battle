@@ -19,7 +19,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('/add-follow', ['as'=>'add-follow', 'uses'=>'TrackingController@add_follow']);
     Route::delete('/del-follow', ['as'=>'del-follow', 'uses'=>'TrackingController@del_follow']);
 
-    Route::get('/personal-area', ['as'=>'area', 'uses'=>'AreaController@index']);
+
+    Route::get('/personal-area', ['as'=>'cabinet', 'uses'=>'AreaController@index']);
 
     Route::get('/plan/{id}', ['as'=>'plan', 'uses'=>'PlanController@show']);
     Route::post('/subscribe', ['as'=>'subscribe', 'uses'=>'PlanController@subscribe']);

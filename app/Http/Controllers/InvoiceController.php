@@ -21,7 +21,7 @@ class InvoiceController extends Controller
         } catch ( \Exception $e ) {
             session()->flash('status', $e->getMessage());
         }
-        return view('pages.invoice', compact('invoices'));
+        return view('pages.personal-area.invoice', compact('invoices'));
     }
 
 
