@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <article class="battle">
+    <article class="battle elementFirst">
         {{--FORM--}}
         <div class="container">
             <div class="row">

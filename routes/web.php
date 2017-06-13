@@ -31,6 +31,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/invoices', ['as'=>'invoices', 'uses'=>'PersonalArea\InvoiceController@index']);
     Route::get('/invoice/{id}', ['as'=>'downloadInvoice', 'uses'=>'PersonalArea\InvoiceController@download']);
 
+    Route::get('/personal-data', ['as'=>'personal-data', 'uses'=>'PersonalArea\PersonalData@index']);
+    Route::post('/change-data', ['as'=>'change-data', 'uses'=>'PersonalArea\PersonalData@changeData']);
+    Route::post('/change-card', ['as'=>'change-card', 'uses'=>'PersonalArea\PersonalData@changeCard']);
 });
 
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <article class="invoice">
+    <article class="invoice elementFirst">
 
         <div class="container">
             <div class="row">

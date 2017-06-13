@@ -1,7 +1,7 @@
 @extends("layouts.master")
 
 @section('content')
-    <article class="topRepo">
+    <article class="topRepo elementFirst">
         <div class="container">
             <table class="table table-bordered">
                 <caption>Top repository</caption>

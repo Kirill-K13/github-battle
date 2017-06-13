@@ -50,7 +50,7 @@
 
 <script src="{{mix('js/app.js')}}"></script>
 <script src="{{asset('js/my-ajax.js')}}"></script>
-<script src="{{asset('js/my-js.js')}}"></script>
+<script src="{{asset('js/my-settings-js.js')}}"></script>
 <script src="{{asset('js/fake-loader.min.js')}}"></script>
 <script src="{{asset('js/jqueryDataTables.min.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>

@@ -48,7 +48,8 @@ footer {
     padding-right: 10px;
     text-align: center;
 }
-.battle, .topRepo, .search, .subscription, .cabinet, .plan , .cancel , .invoice {
+
+.elementFirst{
     margin-top: 70px;
 }
 .exceptions {
@@ -217,6 +218,14 @@ footer {
 }
 /*End search*/
 
+/*Cabinet*/
+.plan-panel {
+    min-width: 283px;
+    max-width: 400px
+}
+.change-card {
+    margin-top: 10px;
+}
 /*Buttons*/
 .buttonDanger {
     display:inline-block;

@@ -14,7 +14,7 @@ class PlanController extends Controller
     public function show($id)
     {
         // get the plan by from
-        $plan = $this->getPlanByIdOrFail($id);
+        $plan = Plan::getPlanByIdOrFail($id);
 
         return view('pages.personal-area.plan', compact('plan'));
     }
@@ -85,21 +85,5 @@ class PlanController extends Controller
         return redirect()->route('cabinet')->with('status',
             'Your Subscription has been resumed.'
         );
-    }
-
-
-    private function getPlanByIdOrFail($id)
-    {
-        $plans = Plan::getStripePlans();
-
-        if (!$plans) {
-            abort(404);
-        }
-
-        foreach ($plans as $item) {
-            if ($item->id == $id) {
-                return $item;
-            }
-        }
     }
 }

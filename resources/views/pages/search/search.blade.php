@@ -1,7 +1,7 @@
 @extends("layouts.master")
 
 @section('content')
-    <article class="search">
+    <article class="search elementFirst">
 
         @if( !$is_subscribed )
 

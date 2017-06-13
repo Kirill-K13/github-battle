@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <article class="cabinet">
+    <article class="cabinet elementFirst">
 
         @if( $is_subscribed )
 
@@ -21,13 +21,13 @@
         @endif
 
         @foreach($plans as $plan)
-            <div class="col-sm-4">
-                <div class="panel {{ ( $is_subscribed && $subscription->stripe_plan ==  $plan->id ) ? 'panel-success' :  'panel-primary' }}">
+            <div class="col-sm-6 col-md-4">
+                <div class="panel {{ ( $is_subscribed && $subscription->stripe_plan ==  $plan->id ) ? 'panel-success' :  'panel-primary' }} plan-panel">
 
                     <div class="panel-heading text-uppercase">
                         {{ $plan->id }}
                         @if( $is_subscribed &&  ( $subscription->stripe_plan ==  $plan->id ) )
-                            <a href="{{ route('confirmCancellation') }}" class="btn btn-danger btn-sm pull-right" style="margin-top: -3px">Cancel Subscription</a>
+                            <a href="{{ route('confirmCancellation') }}" class="buttonDanger pull-right" style="margin-top: -3px">Cancel Subscription</a>
                         @endif
                     </div>
 

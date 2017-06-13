@@ -27,4 +27,19 @@ class Plan extends Model
             return false;
         }
     }
+
+    static function getPlanByIdOrFail($id)
+    {
+        $plans = Plan::getStripePlans();
+
+        if (!$plans) {
+            abort(404);
+        }
+
+        foreach ($plans as $item) {
+            if ($item->id == $id) {
+                return $item;
+            }
+        }
+    }
 }

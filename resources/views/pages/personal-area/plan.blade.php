@@ -1,7 +1,7 @@
 @extends("layouts.master")
 
 @section('content')
-    <article class="plan">
+    <article class="plan elementFirst">
 
         <div class="container">
             <div class="row">

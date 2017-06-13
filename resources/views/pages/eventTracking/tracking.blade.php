@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <article class="subscription">
+    <article class="subscription elementFirst">
 
         <div class="col-xs-12 col-sm-8 col-md-8">
 

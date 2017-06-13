@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <article class="cancel">
+    <article class="cancel elementFirst">
 
         <div class="container">
             <div class="row">
