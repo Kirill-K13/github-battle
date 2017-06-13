@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Stripe\Stripe;
+use Exception;
 
 class Plan extends Model
 {
@@ -22,7 +23,7 @@ class Plan extends Model
                 return \Stripe\Plan::all()->data;
 
             });
-        } catch ( \Exception $e ) {
+        } catch (Exception $e ) {
             return false;
         }
     }

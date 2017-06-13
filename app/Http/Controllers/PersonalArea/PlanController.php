@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Exception;
 
 
 class PlanController extends Controller
 {
     public function show($id)
     {
-        // get the plan by id from cache
+        // get the plan by from
         $plan = $this->getPlanByIdOrFail($id);
 
         return view('pages.personal-area.plan', compact('plan'));
@@ -22,31 +22,30 @@ class PlanController extends Controller
 
     public function subscribe(Request $request)
     {
-
         // Validate request
         $this->validate( $request, ['stripeToken' => 'required', 'plan' => 'required'] );
 
-        // User chosen plan
+        //dd($request->get('stripeToken'));
+
+        // User selected plan
         $pickedPlan = $request->get('plan');
 
         $user = Auth::user();
 
         try {
-            // check already subscribed and if already subscribed with picked plan
+            // check subscribed and subscribed with picked plan
             if( $user->subscribed('main') && ! $user->subscribedToPlan($pickedPlan, 'main') ) {
 
-                // swap if different plan attempt
+                // changing Plan
                 $user->subscription('main')->swap($pickedPlan);
 
             } else {
                 // Create subscription
-
-                //dd($request->get('stripeToken'));
                 $user->newSubscription('main', $pickedPlan)->create($request->get('stripeToken'), [
                     'email' => $user->email,
                 ]);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             return redirect()->back()->withErrors(['status' => $e->getMessage()]);
         }
@@ -63,9 +62,10 @@ class PlanController extends Controller
     {
         try {
             $request->user()->subscription('main')->cancel();
-        } catch ( \Exception $e) {
+        } catch (Exception $e) {
             return redirect()->route('cabinet')->with('status', $e->getMessage());
         }
+
         return redirect()->route('cabinet')->with('status',
             'Your Subscription has been canceled.'
         );
@@ -76,11 +76,12 @@ class PlanController extends Controller
     {
         try {
             $request->user()->subscription('main')->resume();
-        } catch ( \Exception $e) {
+        } catch (Exception $e) {
             return redirect()->route('cabinet')->with('status', $e->getMessage());
         }
+
         return redirect()->route('cabinet')->with('status',
-            'Glad to see you back. Your Subscription has been resumed.'
+            'Your Subscription has been resumed.'
         );
     }
 
@@ -89,8 +90,8 @@ class PlanController extends Controller
     {
         $plans = Plan::getStripePlans();
 
-        if ( !$plans ) {
-            throw new NotFoundHttpException;
+        if (!$plans) {
+            abort(404);
         }
 
         foreach ($plans as $item) {

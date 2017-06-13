@@ -19,7 +19,9 @@ class CabinetController extends Controller
         $is_subscribed = Auth::user()->subscribed('main');
 
         // If subscribed get the subscription
+        // return subscription or null
         $subscription = Auth::user()->subscription('main');
+
 
         return view('pages.personal-area.cabinet', compact('plans', 'is_subscribed', 'subscription'));
     }

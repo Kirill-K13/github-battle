@@ -12,6 +12,7 @@ class InvoiceController extends Controller
 
     public function __construct()
     {
+        // Only subscribed user
         $this->middleware('subscribed');
     }
 

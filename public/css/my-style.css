@@ -51,6 +51,10 @@ footer {
 .battle, .topRepo, .search, .subscription, .cabinet, .plan , .cancel , .invoice {
     margin-top: 70px;
 }
+.exceptions {
+    margin-top: 100px;
+    text-align: center;
+}
 
 /*Navbar*/
 .navbar-inverse {
@@ -241,7 +245,9 @@ footer {
 }
 
 
-/* Flex */
+
+
+/* Flex for result battle*/
 .flex-container {
     display: flex;
     flex-flow: row wrap;

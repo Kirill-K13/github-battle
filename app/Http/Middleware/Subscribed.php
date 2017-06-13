@@ -18,7 +18,7 @@ class Subscribed
 
         if ($request->user() && ! $request->user()->subscribed('main')) {
             // This user is not a paying customer...
-            return redirect()->route('cabinet');
+            abort(403, 'Unauthorized action');
         }
         return $next($request);
     }
