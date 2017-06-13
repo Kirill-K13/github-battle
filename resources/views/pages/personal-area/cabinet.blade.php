@@ -22,7 +22,6 @@
 
         @foreach($plans as $plan)
             <div class="col-sm-4">
-
                 <div class="panel {{ ( $is_subscribed && $subscription->stripe_plan ==  $plan->id ) ? 'panel-success' :  'panel-primary' }}">
 
                     <div class="panel-heading text-uppercase">

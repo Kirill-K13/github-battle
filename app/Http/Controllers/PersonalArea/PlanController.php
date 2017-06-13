@@ -41,7 +41,9 @@ class PlanController extends Controller
 
             } else {
                 // Create subscription
-                $user->newSubscription('main', $pickedPlan)->create($request->get('stripeToken'), [
+                $user->newSubscription('main', $pickedPlan)
+                     ->withCoupon($request->get('coupon'))
+                     ->create($request->get('stripeToken'), [
                     'email' => $user->email,
                 ]);
             }
