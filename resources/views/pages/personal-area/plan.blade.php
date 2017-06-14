@@ -28,7 +28,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="col-xs-12 center">
 
-                        @if (count($errors) > 0)
+                        @if(count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -60,15 +60,20 @@
                                             <input type="hidden" name="plan" value="{{ $plan['id'] }}">
                                         </div>
 
-                                        <div class="col-xs-12">
-                                            <label class="pull-right">
-                                                <span class="text-primary">Trial Days (5)</span>
-                                                <input type="checkbox" name="trial" value="trial">
-                                            </label>
-                                        </div>
+                                        @if( !$user->subscribed('main') )
+                                            <div class="col-xs-12">
+                                                <label class="pull-right">
+                                                    <span class="text-primary">Trial Days (5)</span>
+                                                    <input type="checkbox" name="trial" value="trial">
+                                                </label>
+                                            </div>
+                                        @endif
 
                                         <div class="col-xs-12 col-sm-12 col-md-6">
-                                            <button type="submit" class="btn btn-primary pull-left">Make $ {{ $plan['amount'] / 100 }} Payment</button>
+                                            <button type="submit" class="btn btn-primary pull-left">
+                                                Make $ {{ $plan['amount'] / 100 }} Payment
+                                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                            </button>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-12 col-md-6">

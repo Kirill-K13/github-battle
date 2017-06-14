@@ -235,7 +235,10 @@ footer {
 /*Cabinet*/
 .plan-panel {
     min-width: 283px;
-    max-width: 400px
+    max-width: 400px;
+}
+.plan-panel .panel-body {
+    min-height: 350px;
 }
 .change-card {
     margin-top: 20px;

@@ -30,8 +30,8 @@ class PlanController extends Controller
     {
         // get the plan by from
         $plan = Plan::getPlanByIdOrFail($id);
-
-        return view('pages.personal-area.plan', compact('plan'));
+        $user = Auth::user();
+        return view('pages.personal-area.plan', compact('plan', 'user'));
     }
 
 
@@ -50,7 +50,6 @@ class PlanController extends Controller
         try {
             // check subscribed and subscribed with picked plan
             if( $user->subscribed('main') && ! $user->subscribedToPlan($pickedPlan, 'main') ) {
-
                 // changing Plan
                 $user->subscription('main')->swap($pickedPlan);
 
@@ -62,6 +61,7 @@ class PlanController extends Controller
                         ->trialDays(5)
                         ->create($request->get('stripeToken'), [
                             'email' => $user->email,
+                            'description' => 'User: ' . $user->name . ' payment for subscribing to ' . $pickedPlan . ' plan',
                         ]);
                 } else {
                     // Create subscription
@@ -69,6 +69,7 @@ class PlanController extends Controller
                         ->withCoupon($request->get('coupon'))
                         ->create($request->get('stripeToken'), [
                             'email' => $user->email,
+                            'description' => 'User: ' . $user->name . ' payment for subscribing to ' . $pickedPlan . ' plan',
                         ]);
                 }
             }

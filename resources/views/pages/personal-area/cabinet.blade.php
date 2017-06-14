@@ -39,11 +39,18 @@
                         <img src="{{ asset('images/' . $plan->name . '.png') }}" alt="{{ $plan->name }}" height="100">
 
                         <p>{{ $plan->currency }} {{ $plan->amount / 100 }} / {{ $plan->interval }}</p>
+
+                        <ul class="list-group">
+                            @for($i = 1; isset($plan->metadata['advantage-'.$i]); $i++)
+                                <li class="list-group-item">{{ $plan->metadata['advantage-'.$i] }}</li>
+                            @endfor
+                        </ul>
+
                     </div>
 
                     <div class="panel-footer">
                         @if( $is_subscribed &&  ( $subscription->stripe_plan ==  $plan->id ) )
-                            <a href="#" class="btn btn-default btn-block">
+                            <a href="{{ route('personal-data') }}" class="btn btn-default btn-block">
                                 Current Plan
                             </a>
                         @else
