@@ -20,8 +20,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/del-follow', ['as'=>'del-follow', 'uses'=>'TrackingController@del_follow']);
 
 
-    Route::get('/personal-area', ['as'=>'cabinet', 'uses'=>'PersonalArea\CabinetController@index']);
-
+    Route::get('/personal-area', ['as'=>'cabinet', 'uses'=>'PersonalArea\PlanController@index']);
     Route::get('/plan/{id}', ['as'=>'plan', 'uses'=>'PersonalArea\PlanController@show']);
     Route::post('/subscribe', ['as'=>'subscribe', 'uses'=>'PersonalArea\PlanController@subscribe']);
     Route::get('/cancel',  ['as'=>'confirmCancellation', 'uses'=>'PersonalArea\PlanController@confirmCancellation']);

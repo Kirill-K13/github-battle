@@ -15,6 +15,7 @@ class Plan extends Model
         Stripe::setApiKey(User::getStripeKey());
 
         //Cache::forget('stripe.plans');
+
         try {
             // Fetch all the Plans and cache it
             return Cache::remember('stripe.plans', 60*24, function() {

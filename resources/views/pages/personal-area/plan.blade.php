@@ -60,8 +60,15 @@
                                             <input type="hidden" name="plan" value="{{ $plan['id'] }}">
                                         </div>
 
+                                        <div class="col-xs-12">
+                                            <label class="pull-right">
+                                                <span class="text-primary">Trial Days (5)</span>
+                                                <input type="checkbox" name="trial" value="trial">
+                                            </label>
+                                        </div>
+
                                         <div class="col-xs-12 col-sm-12 col-md-6">
-                                            <button class="btn btn-primary pull-left">Make $ {{ $plan['amount'] / 100 }} Payment</button>
+                                            <button type="submit" class="btn btn-primary pull-left">Make $ {{ $plan['amount'] / 100 }} Payment</button>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-12 col-md-6">

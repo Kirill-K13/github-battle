@@ -30,9 +30,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('cabinet') }}">CABINET</a></li>
-                            <li><a href="{{ route('invoices') }}">INVOICES</a></li>
+                            <li><a href="{{ route('cabinet') }}">PLANS</a></li>
                             <li><a href="{{ route('personal-data') }}">PERSONAL DATA</a></li>
+                            <li><a href="{{ route('invoices') }}">INVOICES</a></li>
                         </ul>
 
                     </li>

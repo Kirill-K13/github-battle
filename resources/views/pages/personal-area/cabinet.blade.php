@@ -27,7 +27,7 @@
                     <div class="panel-heading text-uppercase">
                         {{ $plan->id }}
                         @if( $is_subscribed &&  ( $subscription->stripe_plan ==  $plan->id ) )
-                            <a href="{{ route('confirmCancellation') }}" class="buttonDanger pull-right" style="margin-top: -3px">Cancel Subscription</a>
+                            <button onclick='location.href="{{ route('confirmCancellation') }}"' class="buttonDanger pull-right" style="margin-top: -5px">Cancel Subscription</button>
                         @endif
                     </div>
 
@@ -59,7 +59,8 @@
         @endforeach
 
         @if( $is_subscribed && $subscription->onGracePeriod())
-            <div class="col-xs-12">
+
+             <div class="col-xs-12">
                 <div class="alert alert-warning">
 
                     <h3 class="modal-title">
@@ -71,7 +72,18 @@
                     </h3>
 
                 </div>
-            </div>
+             </div>
+
+        @elseif(Auth::user()->onTrial('main'))
+
+                <div class="col-xs-12">
+                    <div class="alert alert-warning">
+                        <h3 class="modal-title">
+                            Trial period expiring at {{ $subscription->trial_ends_at->toFormattedDateString() }} <br>
+                        </h3>
+                    </div>
+                </div>
+
         @endif
 
         @if (session('status'))

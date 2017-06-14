@@ -11,6 +11,21 @@ use Exception;
 
 class PlanController extends Controller
 {
+    public function index()
+    {
+        // Get all plans from stripe api
+        $plans = Plan::getStripePlans();
+
+        // Check is subscribed
+        $is_subscribed = Auth::user()->subscribed('main');
+
+        // If subscribed get the subscription
+        // return subscription or null
+        $subscription = Auth::user()->subscription('main');
+
+        return view('pages.personal-area.cabinet', compact('plans', 'is_subscribed', 'subscription'));
+    }
+
     public function show($id)
     {
         // get the plan by from
@@ -40,12 +55,22 @@ class PlanController extends Controller
                 $user->subscription('main')->swap($pickedPlan);
 
             } else {
-                // Create subscription
-                $user->newSubscription('main', $pickedPlan)
-                     ->withCoupon($request->get('coupon'))
-                     ->create($request->get('stripeToken'), [
-                    'email' => $user->email,
-                ]);
+                if ( !empty($request->get('trial')) ) {
+                    // Create subscription on trial period
+                    $user->newSubscription('main', $pickedPlan)
+                        ->withCoupon($request->get('coupon'))
+                        ->trialDays(5)
+                        ->create($request->get('stripeToken'), [
+                            'email' => $user->email,
+                        ]);
+                } else {
+                    // Create subscription
+                    $user->newSubscription('main', $pickedPlan)
+                        ->withCoupon($request->get('coupon'))
+                        ->create($request->get('stripeToken'), [
+                            'email' => $user->email,
+                        ]);
+                }
             }
         } catch (Exception $e) {
 

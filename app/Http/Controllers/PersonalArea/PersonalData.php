@@ -12,8 +12,17 @@ class PersonalData extends Controller
     public function index()
     {
         $user = Auth::user();
-        $currentPlan = $user->subscription('main')->stripe_plan;
-        $plan = Plan::getPlanByIdOrFail($currentPlan);
+
+        // Check is subscribed
+        $is_subscribed = $user->subscribed('main');
+
+        if ($is_subscribed) {
+            $currentPlan = $user->subscription('main')->stripe_plan;
+            $plan = Plan::getPlanByIdOrFail($currentPlan);
+        } else {
+            $plan = null;
+        }
+
         return view('pages.personal-area.personal-data', compact('user', 'plan'));
     }
 
@@ -23,7 +32,7 @@ class PersonalData extends Controller
 
         // Validate request
         $rulesName = ($request['name'] != $user->name) ? 'required|string|max:30|min:3|unique:users' : 'required|string|max:30|min:3';
-        $rulesEmail= ($request['email'] != $user->email) ? 'required|string|max:50|min:3|unique:users' : 'required|string|max:50|min:3';
+        $rulesEmail = ($request['email'] != $user->email) ? 'required|string|max:50|min:3|unique:users' : 'required|string|max:50|min:3';
         $this->validate( $request, [
             'name' => $rulesName,
             'email' => $rulesEmail
