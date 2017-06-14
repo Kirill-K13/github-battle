@@ -22,9 +22,8 @@
                     <li><a href="{{ route('home') }}">HOME</a></li>
                     <li><a href="{{ route('topRepo') }}">TOP REPOSITORIES</a></li>
                     <li><a href="{{ route('tracking') }}">EVENT TRACKING</a></li>
-                    <li><a href="{{ route('cabinet') }}"></a></li>
 
-                    <li class="dropdown pull-left">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             PERSONAL AREA <span class="caret"></span>
                         </a>
@@ -37,7 +36,7 @@
 
                     </li>
 
-                    <li class="dropdown pull-left">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
@@ -46,7 +45,7 @@
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                   document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
 

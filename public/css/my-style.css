@@ -112,6 +112,20 @@ footer {
 .dropdown-menu > li > a {
     color: white;
 }
+
+@media only screen and (min-width:769px) and (max-width:1000px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+
+    .navbar-header .collapse, .navbar-toggle {
+        display: block !important;
+    }
+}
 /*End navbar*/
 
 
