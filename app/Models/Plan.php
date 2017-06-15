@@ -29,9 +29,9 @@ class Plan extends Model
         }
     }
 
-    static function getPlanByIdOrFail($id)
+    public static function getPlanByIdOrFail($id)
     {
-        $plans = Plan::getStripePlans();
+        $plans = static::getStripePlans();
 
         if (!$plans) {
             abort(404);
